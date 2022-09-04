@@ -2,7 +2,7 @@
 layout: default
 ---
 
-<img src="{{site.baseurl}}/assets/images/selfAtBeach.png" width=500>
+<img src="{{site.baseurl}}/assets/images/selfAtBeach.png" width=300 id=photoleft>
 
 # Gabriel J. Ferrer, Ph.D.
 

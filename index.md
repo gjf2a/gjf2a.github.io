@@ -13,13 +13,13 @@ Professor of [Computer Science](https://www.hendrix.edu/mathcs/) at [Hendrix Col
 * Assistant Professor of Computer Science, Hendrix College, 2002-2008
 * Lecturer of Computer Science, University of Virginia, 2001-2002
 
-## Academic Activities
+## Academic Interests
 * Teaching
 * Research
 
 ## Additional Interests
 * Music
-* Fencing
+* [Fencing](https://cafencing.squarespace.com/?fbclid=IwAR2W1-yiyoj-bEjRaJGeumUSiK6R83jP7-ajcp9QCbIlkqqLR1GtkaSIAu0)
 
 ## Other Personal Pages
 * Blog: [Computing Intelligently](http://gjf2a.blogspot.com)

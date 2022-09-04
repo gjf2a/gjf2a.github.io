@@ -2,6 +2,8 @@
 layout: default
 ---
 
+<img src="{{site.baseurl}}/assets/images/selfAtBeach.png" width=500>
+
 # Gabriel J. Ferrer, Ph.D.
 
 Professor of [Computer Science](https://www.hendrix.edu/mathcs/) at [Hendrix College](https://www.hendrix.edu)

@@ -1,6 +1,7 @@
 # Gabriel J. Ferrer, Ph.D.
 
 Professor of [Computer Science](https://www.hendrix.edu/mathcs/)
+
 [Hendrix College](https://www.hendrix.edu)
 
 ## Education

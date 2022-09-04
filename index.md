@@ -2,7 +2,9 @@
 layout: default
 ---
 
-<img src="{{site.baseurl}}/assets/images/selfAtBeach.png" width=300 id=photoleft>
+<img src="{{site.baseurl}}/assets/images/selfAtBeach.png" width=300 id="photoleft"/>
+
+Greetings! I earned my Ph.D. in Computer Science from the University of Virginia in 2002, and I have been on the faculty at Hendrix College ever since. 
 
 # Gabriel J. Ferrer, Ph.D.
 

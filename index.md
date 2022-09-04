@@ -9,9 +9,9 @@ layout: default
 </td>
 
 <td>
-# Gabriel J. Ferrer, Ph.D.
-## Professor of Computer Science
-## Hendrix College
+<h1> Gabriel J. Ferrer, Ph.D.</h1>
+<h2> Professor of Computer Science</h2>
+<h2> Hendrix College</h2>
 
 <hr/>
 

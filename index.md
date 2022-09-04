@@ -17,6 +17,10 @@ Professor of [Computer Science](https://www.hendrix.edu/mathcs/) at [Hendrix Col
 * Teaching
 * Research
 
+## Additional Interests
+* Music
+* Fencing
+
 ## Other Personal Pages
 * Blog: [Computing Intelligently](http://gjf2a.blogspot.com)
 * [Hendrix Faculty Page](https://www.hendrix.edu/mathcs/profile.aspx?id=70718)

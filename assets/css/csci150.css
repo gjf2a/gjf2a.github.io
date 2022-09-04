@@ -110,3 +110,8 @@ div.alert code {
     margin-bottom:10px;
     margin-top:10px;
 }
+
+#photoleft {
+ float: left;
+ margin: 0 0 0 15px;
+}

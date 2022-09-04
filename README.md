@@ -16,3 +16,7 @@ Professor of [Computer Science](https://www.hendrix.edu/mathcs/) at [Hendrix Col
 ## Academic Activities
 * Teaching
 * Research
+
+## Links
+* [Hendrix Faculty Page](https://www.hendrix.edu/mathcs/profile.aspx?id=70718)
+* [GitHub](https://github.com/gjf2a)

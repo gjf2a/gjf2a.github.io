@@ -34,8 +34,12 @@ navigation:
       url: 'current_courses.html'
     - page: Teaching History
       url: 'teaching_history.html'
-  - page: Research
-    url: 'research.html'
+  - Title: Research
+    subfolderitems:
+    - page: Research Statement
+      url: 'research.html'
+    - page: Publications
+      url: 'publications.html'
   - page: Other Interests
     url: 'other_interests.html'
   - page: Other Personal Pages

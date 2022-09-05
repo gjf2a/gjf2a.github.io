@@ -15,7 +15,7 @@ layout: default
 ## 2009-2014
 * Gabriel J. Ferrer. "[Towards Human-Induced Vision-Guided Robot Behavior.](assets/publications/robotGNG.pdf)" In *Proceedings of the 2014 AAAI Fall Symposium: Knowledge, Skill, and Behavior Transfer in Autonomous Robots* (Arlington, VA, November 13-15, 2014). 
 * Gabriel J. Ferrer, "[Creating Visual Reactive Robot Behaviors Using Growing Neural Gas.](assets/publications/maics2014.pdf)" In *[Proceedings of the 25th Modern Artificial Intelligence and Cognitive Science Conference (MAICS2014)]*(http://ceur-ws.org/Vol-1144/) (Spokane, WA, April 26, 2014) 
-* Gabriel J. Ferrer, "[Using Robotics to Teach the Scientific Method.](assets/publications/RobotsScientificMethod.pdf)" *Journal of Computing Sciences in Colleges* 28:5 (May 2013) 108-114.
+* Gabriel J. Ferrer, "[Using Robotics to Teach the Scientific Method.](assets/publications/RoboticsScientificMethod.pdf)" *Journal of Computing Sciences in Colleges* 28:5 (May 2013) 108-114.
 * Gabriel J. Ferrer, "[An Interactive Parser Generator for Context-Free Grammars.](assets/publications/InteractiveParser.pdf)" *Journal of Computing Sciences in Colleges* 28:2 (December 2012) 103-110. ([GitHub](https://github.com/gjf2a/grambler))
 * Gabriel J. Ferrer, "[Encoding Robotic Sensor States for Q-Learning Using the Self-Organizing Map.](assets/publications/ccscms10.pdf]" *Journal of Computing Sciences in Colleges* 25:5 (May 2010) 133-139. 
 * Gabriel J. Ferrer, "[A Formal Language and Analysis Tool for Black Box Specifications.](assets/publications/ccscms09.pdf)" *Journal of Computing Sciences in Colleges* 24:5 (May 2009) 12-18. ([SourceForge](http://boundalyzer.sourceforge.net))

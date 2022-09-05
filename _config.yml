@@ -27,7 +27,7 @@ semester: Home Page
 
 navigation:
   - page: Home
-    url: '{{site.baseurl}}'
+    url: 'https://gjf2a.github.io'
   - title: Teaching
     subfolderitems:
     - page: Current Courses

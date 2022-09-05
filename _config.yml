@@ -26,8 +26,14 @@ number: Gabriel J. Ferrer
 semester: Home Page
 
 navigation:
-  - page: Teaching
-    url: 'teaching.html'
+  - page: Home
+    url: ''
+  - title: Teaching
+    subfolderitems:
+    - page: Current Courses
+      url: 'current_courses.html'
+    - page: Teaching History
+      url: 'teaching_history.html'
   - page: Research
     url: 'research.html'
 

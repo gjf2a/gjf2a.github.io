@@ -15,14 +15,12 @@ layout: default
 
 <hr/>
 
-Greetings! I earned my Ph.D. in Computer Science from the University of Virginia in 2002, and I have been on the faculty at Hendrix College ever since. 
+Greetings! I earned my Ph.D. in Computer Science from the University of Virginia in 2002, and I have been on the faculty at Hendrix College ever since. I
+teach courses across the Computer Science curriculum. My research involves
+topics in Robotics, Artificial Intelligence, and Computer Science Education.
 </td>
 </tr>
 </table>
-
-## Academic Interests
-* Teaching
-* Research
 
 ## Additional Interests
 * Music

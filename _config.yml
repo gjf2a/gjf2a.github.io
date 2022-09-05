@@ -34,7 +34,7 @@ navigation:
       url: 'current_courses.html'
     - page: Teaching History
       url: 'teaching_history.html'
-  - Title: Research
+  - title: Research
     subfolderitems:
     - page: Research Statement
       url: 'research.html'

@@ -1,0 +1,12866 @@
+%PDF-1.3
+%‚„œ”
+2 0 obj
+<<
+/Length 8057
+>>
+stream
+1 g
+/GS1 gs
+0 792 612 -791.94 re
+f
+90 55 432 -10 re
+f
+108 756 396 -10 re
+f
+54 630 504 -558 re
+f
+BT
+/TT2 1 Tf
+12 0 0 12 54 622 Tm
+0 g
+0 Tc
+0 Tw
+(1.  Abstract)Tj
+/TT4 1 Tf
+9 0 0 9 64 607 Tm
+-0.04 Tw
+[( The situated control component of most autonomous agents has)]TJ
+-1.1111 -1.2222 TD
+0.1333 Tw
+(traditionally been either a planner or reactive system. However,)Tj
+T*
+-0.0389 Tw
+(there is general agreement that planning and reaction represent two)Tj
+T*
+0.2444 Tw
+(ends of a spectrum. These action selection methods differ in,)Tj
+T*
+-0.0478 Tw
+(among other things, their treatment of representation. Planners per-)Tj
+T*
+0.1111 Tw
+(form projection on an internal world model, while pure reactive)Tj
+T*
+0.1367 Tw
+(systems store no internal representation, using ìthe world as its)Tj
+T*
+0.0222 Tw
+(own modelî. We seek to move situated controllers, or perception/)Tj
+T*
+0 Tw
+(action systems, toward the middle of this spectrum.)Tj
+1.1111 -1.4444 TD
+0.1811 Tw
+[( We have developed a perception/action \(PA\) system which)]TJ
+-1.1111 -1.2222 TD
+-0.0322 Tw
+(incorporates task dependent representations. These representations)Tj
+T*
+0.1256 Tw
+(do not constitute the full world model of classical planners, but)Tj
+T*
+(they do provide action selection information beyond the current)Tj
+T*
+0.01 Tw
+(sensory data used by reactive systems. We will show that our rep-)Tj
+T*
+(resentations are compact and maintainable and that they make our)Tj
+T*
+-0.0244 Tw
+(PA system more effective than a stateless reactive system. We will)Tj
+T*
+0.0711 Tw
+(also discuss the implications a PA system using such representa-)Tj
+T*
+0.0256 Tw
+(tion has on the rest of an agentís architecture. The discussion will)Tj
+T*
+0.2222 Tw
+(be carried out in the context of an application involving both)Tj
+T*
+0 Tw
+(planned and dynamic components.)Tj
+/TT2 1 Tf
+12 0 0 12 54 380 Tm
+[(2.  INTR)30.5(ODUCTION)]TJ
+/TT4 1 Tf
+10 0 0 10 64 364.33 Tm
+0.065 Tw
+(Most researchers would agree that a purely stateless au-)Tj
+-1 -1.2 TD
+0.039 Tw
+(tonomous agent is a strawman, yet there is little agreement)Tj
+T*
+0.044 Tw
+(about what should be represented and how that representa-)Tj
+T*
+0.07 Tw
+(tion should be organized or accessed. We are interested in)Tj
+T*
+0.004 Tw
+(using representation at the perception/action layer \(various-)Tj
+T*
+0.036 Tw
+(ly called the ìskill layerî [5][3], or the ìcontrollerî [6]\), of)Tj
+T*
+-0.028 Tw
+(an agent architecture; that is, the layer where perception and)Tj
+T*
+-0.022 Tw
+(action are most closely linked. We have developed a system)Tj
+T*
+0.315 Tw
+(of representation which can be used effectively by an)Tj
+T*
+0.124 Tw
+(agentís PA layer. In the next section, we will discuss the)Tj
+T*
+0.044 Tw
+(uses of representation in a PA layer. Then we will develop)Tj
+T*
+0.017 Tw
+(an organizational structure for our representation as well as)Tj
+T*
+0.011 Tw
+(an access method. We will then address the issues of repre-)Tj
+T*
+0.058 Tw
+(sentation maintenance and performance in the context of a)Tj
+T*
+-0.035 Tw
+(task performed by our robot, Bruce. Finally, we will explore)Tj
+T*
+-0.036 Tw
+(the impact that representation at the PA layer has on the oth-)Tj
+T*
+0 Tw
+(er layers of our three-level architecture.)Tj
+/TT2 1 Tf
+12 0 0 12 54 156 Tm
+[(3.  REPRESENT)90.6(A)94.7(TION)]TJ
+/TT4 1 Tf
+10 0 0 10 72 140.33 Tm
+0.213 Tw
+(Why have representation in a perception/action sys-)Tj
+-1.8 -1.2 TD
+-0.025 Tw
+(tem? It can serve two inter-related purposes. First, represen-)Tj
+T*
+0.61 Tw
+(tation can greatly facilitate some tasks by storing)Tj
+T*
+0.094 Tw
+(information which cannot be currently gathered from sen-)Tj
+T*
+0.02 Tw
+(sors. Consider the following example: you are driving your)Tj
+T*
+0.111 Tw
+(car and you come to an intersection. To make a left turn,)Tj
+26.55 54.3 TD
+0.009 Tw
+(you must determine if the cross street is clear in both direc-)Tj
+0 -1.2 TD
+0.066 Tw
+(tions. While it may be possible to create a reactive system)Tj
+T*
+0.134 Tw
+(which can make this determination by rapidly redirecting)Tj
+T*
+0.055 Tw
+(its sensors, it is more practical to have a representation for)Tj
+T*
+0 Tw
+(the-direction-I-just-looked-is-clear.)Tj
+1.8 -1.2 TD
+0.138 Tw
+[(No)25.2(w consider making a left turn in a dif)22.1(ferent situa-)]TJ
+-1.8 -1.2 TD
+0.029 Tw
+[(tion. Y)109.8(ou look right and see the w)10.1(ay is clear)39.2(, then you look)]TJ
+T*
+0.002 Tw
+[(left and see that direction is also clear)53.1(. When you look back)]TJ
+T*
+0.067 Tw
+[(to the right, you see that a truck has pulled up ne)15.5(xt to you)]TJ
+T*
+0.012 Tw
+[(and your vie)23.5(w is block)8.8(ed. An agent with representation can)]TJ
+T*
+0.05 Tw
+[(remember that the w)7.6(ay w)9(as clear \(for some interv)21.8(al\), b)18.7(ut a)]TJ
+T*
+0 Tw
+[(pure reacti)24.1(v)15(e)0( agent cannot.)]TJ
+1.8 -1.2 TD
+0.012 Tw
+[(Suppose instead that you look left and see that the w)9.6(a)0(y)]TJ
+-1.8 -1.2 TD
+0.03 Tw
+[(is clear)39.4(, then you look right and see a car coming. No)19.1(w the)]TJ
+T*
+0.035 Tw
+[(truck pulls up ne)13.4(xt to you in the right lane and blocks your)]TJ
+T*
+0.091 Tw
+[(vie)24.7(w of the oncoming car)56.1(. Y)110.2(ou need to remember that the)]TJ
+T*
+0.161 Tw
+[(car w)9.9(as there so that you doní)18.2(t pull out. Since the truck)]TJ
+T*
+0.134 Tw
+[(occludes the car)38.9(, a reacti)23.1(v)15(e)0( system \(without x-ray vision\))]TJ
+T*
+0.016 Tw
+[(cannot use the kno)25.2(wledge of the carí)54.1(s presence in its action)]TJ
+T*
+0.143 Tw
+[(selection. In both of these cases, the safest strate)15.7(gy for a)]TJ
+T*
+0.008 Tw
+[(reacti)24.2(v)15(e)0( agent is to w)8.4(ait for the truck to lea)18.2(v)15(e, just in case it)]TJ
+T*
+0.125 Tw
+[(w)10.2(as occluding an)15.2(y cars. Ho)25(we)25(v)15(e)0(r)39.9(,)0( this limits the agent to)]TJ
+T*
+-0.0002 Tc
+0.1792 Tw
+(act only when it can gather)Tj
+/TT6 1 Tf
+12.121 0 TD
+0 Tc
+0 Tw
+(all)Tj
+/TT4 1 Tf
+1.056 0 TD
+0.179 Tw
+[( information necessary to)]TJ
+-13.177 -1.2 TD
+-0.01 Tw
+(select an action at the)Tj
+/TT6 1 Tf
+8.808 0 TD
+[(curr)37.2(ent instant)]TJ
+/TT4 1 Tf
+5.87 0 TD
+[( in time. An agent with)]TJ
+-14.678 -1.2 TD
+0.253 Tw
+(representation can act correctly in this situation \(within)Tj
+T*
+0.076 Tw
+[(some time frame\) if it remembers whether there w)10(as a car)]TJ
+T*
+0.032 Tw
+[(coming before the truck arri)22.3(v)15(ed. A system with representa-)]TJ
+T*
+0.031 Tw
+[(tion can act with limited e)10.6(xtent sensors and in the presence)]TJ
+T*
+0 Tw
+(of occlusion.)Tj
+1 -1.2 TD
+0.03 Tw
+(Representation can also serve as the basis for active per-)Tj
+-1 -1.2 TD
+0.02 Tw
+(ception. It can describe what to look for and where to look.)Tj
+T*
+0.086 Tw
+(Segmentation and recognition are more difficult without a)Tj
+T*
+-0.021 Tw
+(priori knowledge. Our PA layerís representation describes a)Tj
+T*
+-0.041 Tw
+(limited collection of task-dependent objectís which an agent)Tj
+T*
+0.061 Tw
+(expects to find in its sensory field. In addition, representa-)Tj
+T*
+0.072 Tw
+(tion provides information about where an agent should di-)Tj
+T*
+-0.056 Tw
+(rect its perception. For example, a quarterback agent will not)Tj
+T*
+0.058 Tw
+(be able to simultaneously perceive all his receivers, but he)Tj
+T*
+-0.02 Tw
+(can use his knowledge of their positions \(based either on re-)Tj
+T*
+0.03 Tw
+(cent sightings or an understanding of their intended routes\))Tj
+T*
+0 Tw
+(to check each one and decide who is open.)Tj
+/TT2 1 Tf
+12 0 0 12 319.5 127 Tm
+(4.  THE EFFECTIVE FIELD OF VIEW)Tj
+/TT4 1 Tf
+10 0 0 10 329.5 111.33 Tm
+0.079 Tw
+(This section describes the overall organization of repre-)Tj
+-1 -1.2 TD
+0.049 Tw
+(sentation in our PA layer, as well as the specific structures)Tj
+T*
+0.076 Tw
+(of which it consists. We address how representation is ac-)Tj
+T*
+0 Tw
+(cessed during the process of action selection.)Tj
+/TT2 1 Tf
+18 0 0 18 74.7 708 Tm
+[(Systems f)25.1(or P)19.7(e)0(r)17.7(ception, Action and Effecti)9.9(v)10(e)0( Repr)17.6(esentation)]TJ
+/TT4 1 Tf
+10 0 0 10 190.05 677.33 Tm
+(Glenn S. Wasson, Gabriel J. Ferrer and Worthy N. Martin)Tj
+-7.903 -1.4 TD
+(Computer Science Department, Thornton Hall, University of Virginia, Charlottesville, VA 22903)Tj
+11.318 -1.4 TD
+({ wasson | ferrer | martin }@virginia.edu)Tj
+ET
+endstream
+endobj
+3 0 obj
+<<
+/ProcSet [/PDF /Text ]
+/Font <<
+/TT2 4 0 R
+/TT4 5 0 R
+/TT6 6 0 R
+>>
+/ExtGState <<
+/GS1 7 0 R
+>>
+>>
+endobj
+10 0 obj
+<<
+/Length 10344
+>>
+stream
+1 g
+/GS1 gs
+0 792 612 -791.94 re
+f
+90 55 432 -10 re
+f
+108 756 396 -10 re
+f
+54 738 504 -666 re
+f
+BT
+/TT4 1 Tf
+10 0 0 10 64 731.33 Tm
+0 g
+0 Tc
+0.061 Tw
+(Our PA layer selects actions based on information in its)Tj
+/TT6 1 Tf
+-1 -1.2 TD
+0.009 Tw
+(effective field of view)Tj
+/TT4 1 Tf
+8.755 0 TD
+(\(EFOV\). We define the absolute field)Tj
+-8.755 -1.2 TD
+-0.052 Tw
+(of view of a sensor as the area in which it can reliably extract)Tj
+T*
+-0.036 Tw
+(information about the environment at any one time)Tj
+8 0 0 8 255.07 699.3301 Tm
+0 Tw
+(1)Tj
+10 0 0 10 259.07 695.33 Tm
+-0.036 Tw
+(. The ef-)Tj
+-20.507 -1.2 TD
+0.069 Tw
+(fective field of view includes the absolute field of view as)Tj
+T*
+0.092 Tw
+(well as the location and identity of recently perceived ob-)Tj
+T*
+0.049 Tw
+(jects which are important to the agentís task. For example,)Tj
+T*
+0.051 Tw
+(in the previous quarterback example, the quarterbackís ab-)Tj
+T*
+0.005 Tw
+(solute field of view may contain only the receiver streaking)Tj
+T*
+0.052 Tw
+(toward the end-zone, while his effective field of view may)Tj
+T*
+0.024 Tw
+(contain that information as well as the expected position of)Tj
+T*
+0 Tw
+(the linebacker he saw blitzing from the left side.)Tj
+1 -1.4 TD
+-0.016 Tw
+(It is important to note that his effective field of view does)Tj
+-1 -1.2 TD
+-0.023 Tw
+(not contain the location of the coach, the fans or any players)Tj
+T*
+0.03 Tw
+(on the sidelines because their positions are unimportant for)Tj
+T*
+0.096 Tw
+(the complete-the-pass task. Note also that the priorities of)Tj
+T*
+0.027 Tw
+(the task: completing the pass above personal safety, dictate)Tj
+T*
+0.2 Tw
+(that the most reliable information, i.e. the most recently)Tj
+T*
+0.024 Tw
+(sensed data, be maintained about the receiver. Thus the ab-)Tj
+T*
+-0.037 Tw
+(solute field of view tracks the receiver while the positions of)Tj
+T*
+-0.004 Tw
+(blitzing linemen are extrapolated from where they were last)Tj
+T*
+0 Tw
+(seen.)Tj
+1 -1.4 TD
+-0.046 Tw
+(Since the effective field of view contains information out-)Tj
+-1 -1.2 TD
+0.027 Tw
+(side of the absolute field of view, we must begin to ask the)Tj
+T*
+0.002 Tw
+(question, what should be represented? This is a broad ques-)Tj
+T*
+-0.028 Tw
+(tion with a range of semantic meanings for ëwhatí. Since we)Tj
+T*
+-0.046 Tw
+(are interested in a PA layer that must rapidly interact with its)Tj
+T*
+0.043 Tw
+(environment, we have defined, for our representation, sim-)Tj
+T*
+0 Tw
+(ple, task-dependent structures called)Tj
+/TT6 1 Tf
+14.802 0 TD
+(markers)Tj
+/TT4 1 Tf
+3.277 0 TD
+(.)Tj
+/TT2 1 Tf
+11 0 0 11 54 375.67 Tm
+[(4.1  Mark)10.2(ers)]TJ
+/TT4 1 Tf
+10 0 0 10 64 360.33 Tm
+0.126 Tw
+(The unit of representation in our system is the marker.)Tj
+-1 -1.2 TD
+0.025 Tw
+(Each marker corresponds to an object that the PA layer be-)Tj
+T*
+0.06 Tw
+(lieves to be important to its current task. Ullman [12] uses)Tj
+T*
+0.08 Tw
+(the term ìmarkingî to refer to remembering a location for)Tj
+T*
+0.229 Tw
+(later reference. He supposes the creation of a ìmarking)Tj
+T*
+0.089 Tw
+(mapî that holds context dependent locations, in the visual)Tj
+T*
+0.006 Tw
+(field, that have been analyzed. Attneave and Farrar [2] sug-)Tj
+T*
+0.107 Tw
+(gest that locations outside the visual field can be marked.)Tj
+T*
+0.106 Tw
+(Pylyshyn describes a similar concept in his FINST model)Tj
+T*
+0.145 Tw
+([8]. He describes a limited number of ìreference tokensî)Tj
+T*
+-0.028 Tw
+(which can be bound to visual features. This binding is a pre-)Tj
+T*
+0.198 Tw
+(requisite to determining relational properties about those)Tj
+T*
+0.033 Tw
+(features. Agre and Chapman [1] use markers in their Pengi)Tj
+T*
+0.044 Tw
+(system to identify objects relevant to the penguinís current)Tj
+T*
+0.284 Tw
+(task, e.g. the-ice-block-blocking-my-escape. While Agre)Tj
+T*
+-0.018 Tw
+(and Chapman used an overhead perspective and directly ac-)Tj
+T*
+0.027 Tw
+(cessed the gameís data structures, Brill considers issues in-)Tj
+T*
+0.061 Tw
+(volved in using markers with early vision in dynamic, 3D,)Tj
+T*
+0 Tw
+(1st person domains involving occlusion [4].)Tj
+ET
+1 g
+54 130.98 238.5 -14.98 re
+f
+0 G
+2 J 0 j 0.6 w 3.86 M []0 d
+1 i 
+207 128.96 m
+63 128.96 l
+B*
+BT
+9 0 0 9 54 110 Tm
+0 g
+-0.0356 Tw
+[(1. W)79.4(e)0( speak of )]TJ
+/TT7 1 Tf
+6.0259 0 TD
+0 Tw
+(ﬁ)Tj
+/TT4 1 Tf
+0.5562 0 TD
+-0.0356 Tw
+[(elds of ìvie)22.6(wî because we are primarily interested)]TJ
+-6.5821 -1.2222 TD
+0.0889 Tw
+(in visual agents and we will concentrate on them throughout the)Tj
+T*
+0.1422 Tw
+[(rest of this paper)55.7(. Ho)25.5(we)24.9(v)14.4(e)0(r)40.2(,)0( the ar)18.5(guments apply to an)14.3(y limited)]TJ
+T*
+0 Tw
+[(range sensor)54.8(.)]TJ
+10 0 0 10 329.5 731.33 Tm
+-0.033 Tw
+(Markers are generally considered to denote the)Tj
+/TT9 1 Tf
+18.789 0 TD
+0 Tw
+(what)Tj
+/TT4 1 Tf
+2.4 0 TD
+-0.033 Tw
+[( and)]TJ
+-22.189 -1.2 TD
+0 Tw
+(the)Tj
+/TT9 1 Tf
+1.437 0 TD
+(where)Tj
+/TT4 1 Tf
+3 0 TD
+-0.035 Tw
+[( for important objects. The)]TJ
+/TT9 1 Tf
+10.767 0 TD
+0 Tw
+(what)Tj
+/TT4 1 Tf
+2.4 0 TD
+-0.035 Tw
+[( of a marker de-)]TJ
+-17.604 -1.2 TD
+0.047 Tw
+(scribes the objectís role in the current task. For example, a)Tj
+T*
+-0.059 Tw
+(screwdriver may be marked as such for the task of tightening)Tj
+T*
+-0.054 Tw
+(a screw, but may be marked as a pry-bar for the task of open-)Tj
+T*
+0.021 Tw
+(ing a stuck window. These two tasks require different roles)Tj
+T*
+-0.017 Tw
+(to be filled, yet the agent can mark the same object for both.)Tj
+T*
+0.044 Tw
+(Selecting an object with the appropriate characteristics is a)Tj
+T*
+0.114 Tw
+(function of the markerís identification routines \(discussed)Tj
+T*
+0.09 Tw
+(below\). A markerís)Tj
+/TT9 1 Tf
+8.324 0 TD
+0 Tw
+(where)Tj
+/TT4 1 Tf
+3 0 TD
+0.09 Tw
+[( component specifies the loca-)]TJ
+-11.324 -1.2 TD
+0.055 Tw
+(tion of the marked object in an ego-centric coordinate sys-)Tj
+T*
+0 Tw
+(tem.)Tj
+1 -1.4 TD
+-0.042 Tw
+(In addition to)Tj
+/TT9 1 Tf
+5.512 0 TD
+0 Tw
+(what)Tj
+/TT4 1 Tf
+2.4 0 TD
+-0.042 Tw
+[( and)]TJ
+/TT9 1 Tf
+1.859 0 TD
+0 Tw
+(where)Tj
+/TT4 1 Tf
+3 0 TD
+-0.042 Tw
+(, our markers contain two)Tj
+-13.771 -1.2 TD
+0.013 Tw
+(additional components:)Tj
+/TT9 1 Tf
+9.636 0 TD
+0 Tw
+(identity)Tj
+/TT4 1 Tf
+4.8 0 TD
+0.013 Tw
+[( and)]TJ
+/TT9 1 Tf
+1.969 0 TD
+0 Tw
+(action)Tj
+/TT4 1 Tf
+3.6 0 TD
+0.013 Tw
+(. Markers)Tj
+-20.005 -1.2 TD
+0.148 Tw
+(have primitive tracking capabilities and their)Tj
+/TT9 1 Tf
+19.05 0 TD
+0 Tw
+(identity)Tj
+/TT4 1 Tf
+-19.05 -1.2 TD
+-0.019 Tw
+(routines are used to maintain the location of their associated)Tj
+T*
+0 Tw
+(objects.)Tj
+/TT9 1 Tf
+3.336 0 TD
+(Identity)Tj
+/TT4 1 Tf
+4.8 0 TD
+0.0001 Tc
+0.0029 Tw
+( is divided into two not necessarily dis-)Tj
+-8.136 -1.2 TD
+0 Tc
+0.052 Tw
+(tinct routines,)Tj
+/TT9 1 Tf
+5.855 0 TD
+0 Tw
+(locate)Tj
+/TT4 1 Tf
+3.6 0 TD
+0.052 Tw
+[( and)]TJ
+/TT9 1 Tf
+2.048 0 TD
+0 Tw
+(track)Tj
+/TT4 1 Tf
+3 0 TD
+0.052 Tw
+(. While)Tj
+/TT9 1 Tf
+3.299 0 TD
+0 Tw
+(track)Tj
+/TT4 1 Tf
+3 0 TD
+0.052 Tw
+[( is con-)]TJ
+-20.802 -1.2 TD
+-0.009 Tw
+(cerned with the frame-to-frame identification of the marked)Tj
+T*
+0 Tw
+(object,)Tj
+/TT9 1 Tf
+2.916 0 TD
+(locate)Tj
+/TT4 1 Tf
+3.6 0 TD
+-0.028 Tw
+[( is used to initially detect the object \(or pos-)]TJ
+-6.516 -1.2 TD
+0 Tw
+(sibly to relocate the object if it is lost by)Tj
+/TT9 1 Tf
+16.333 0 TD
+(track)Tj
+/TT4 1 Tf
+3 0 TD
+(\).)Tj
+-18.333 -1.4 TD
+-0.009 Tw
+(Markers may be in one of two states: instantiated and un-)Tj
+-1 -1.2 TD
+-0.004 Tw
+(instantiated. An instantiated marker is one that the PA layer)Tj
+T*
+0.242 Tw
+(has associated with a specific object. These objects are)Tj
+T*
+-0.031 Tw
+(tracked from frame to frame via the)Tj
+/TT9 1 Tf
+14.305 0 TD
+0 Tw
+(track)Tj
+/TT4 1 Tf
+3 0 TD
+-0.031 Tw
+[( routines of their)]TJ
+-17.305 -1.2 TD
+0.216 Tw
+(associated markers. Uninstantiated markers represent the)Tj
+/TT6 1 Tf
+T*
+0 Tw
+(expectations)Tj
+/TT4 1 Tf
+4.999 0 TD
+0.04 Tw
+[( of the agentís ìhigherî layers, i.e. what to ex-)]TJ
+-4.999 -1.2 TD
+0.027 Tw
+(pect and where to expect it. The PA layer attempts to asso-)Tj
+T*
+-0.019 Tw
+(ciate an uninstantiated marker with an object in the absolute)Tj
+T*
+0 Tw
+(field of view using the markerís)Tj
+/TT9 1 Tf
+13.053 0 TD
+(locate)Tj
+/TT4 1 Tf
+3.6 0 TD
+( routine.)Tj
+/TT9 1 Tf
+-15.653 -1.4 TD
+(Action)Tj
+/TT4 1 Tf
+3.6 0 TD
+0.074 Tw
+[( specifies what the agent wishes to do with the)]TJ
+-4.6 -1.2 TD
+0 Tw
+(marked object.)Tj
+/TT9 1 Tf
+6.194 0 TD
+(Action)Tj
+/TT4 1 Tf
+3.6 0 TD
+(s specify goals to the PA layer. For)Tj
+-9.794 -1.2 TD
+(example, a chair marker with a)Tj
+/TT2 1 Tf
+12.632 0 TD
+(goto)Tj
+/TT4 1 Tf
+1.833 0 TD
+( action would cause the)Tj
+-14.465 -1.2 TD
+0.211 Tw
+(agent to approach the particular chair designated by the)Tj
+T*
+0 Tw
+(markerís)Tj
+/TT9 1 Tf
+3.799 0 TD
+(what/where)Tj
+/TT4 1 Tf
+6 0 TD
+-0.0003 Tc
+-0.0047 Tw
+( components. Each)Tj
+/TT9 1 Tf
+7.818 0 TD
+0 Tc
+0 Tw
+(action)Tj
+/TT4 1 Tf
+3.6 0 TD
+-0.0007 Tc
+-0.0043 Tw
+( speci-)Tj
+-21.217 -1.2 TD
+0 Tc
+0.069 Tw
+(fies a number of parallel routines which the PA layer exe-)Tj
+T*
+0.208 Tw
+(cutes to achieve the desired overall behavior. The exact)Tj
+/TT9 1 Tf
+T*
+0 Tw
+(action)Tj
+/TT4 1 Tf
+3.6 0 TD
+-0.052 Tw
+(s that are available will depend on the types of roles)Tj
+-3.6 -1.2 TD
+0 Tw
+(within the current task, and the capabilities of the agent.)Tj
+1 -1.4 TD
+-0.026 Tw
+(The components of markers are kept minimal so that they)Tj
+-1 -1.2 TD
+-0.01 Tw
+(may be maintained more robustly. However, as we will see,)Tj
+T*
+-0.031 Tw
+(markers provide just the information required for a great va-)Tj
+T*
+0.181 Tw
+(riety of tasks that the PA layer executes. ìHigher levelî)Tj
+T*
+-0.044 Tw
+(knowledge is maintained by higher layers of the agent archi-)Tj
+T*
+0 Tw
+(tecture.)Tj
+1 -1.4 TD
+-0.025 Tw
+(Access to the PA layerís representation means examining)Tj
+-1 -1.2 TD
+0 Tw
+(the)Tj
+/TT9 1 Tf
+1.445 0 TD
+(what)Tj
+/TT4 1 Tf
+2.4 0 TD
+-0.027 Tw
+[( and)]TJ
+/TT9 1 Tf
+1.891 0 TD
+0 Tw
+(where)Tj
+/TT4 1 Tf
+3 0 TD
+-0.027 Tw
+[( components of markers in the agentís)]TJ
+-8.736 -1.2 TD
+-0.062 Tw
+(effective field of view. Our PA layer selects actions based on)Tj
+T*
+0.082 Tw
+(information contained in its effective field of view, i.e. its)Tj
+T*
+-0.032 Tw
+(current sensor values and the information stored in its mark-)Tj
+T*
+0.055 Tw
+(ers. The underlying PA layer keeps the markers up-to-date)Tj
+T*
+0 Tw
+(so that actions are based on current information.)Tj
+/TT2 1 Tf
+11 0 0 11 319.5 93.67 Tm
+[(4.2  The Effecti)9.4(v)10(e)0( Field Of V)36.1(iew In Practice)]TJ
+/TT4 1 Tf
+10 0 0 10 329.5 78.33 Tm
+0.154 Tw
+(So far we have developed the concept of the effective)Tj
+ET
+endstream
+endobj
+11 0 obj
+<<
+/ProcSet [/PDF /Text ]
+/Font <<
+/TT2 4 0 R
+/TT4 5 0 R
+/TT6 6 0 R
+/TT7 12 0 R
+/TT9 13 0 R
+>>
+/ExtGState <<
+/GS1 7 0 R
+>>
+>>
+endobj
+15 0 obj
+<<
+/Length 8191
+>>
+stream
+1 g
+/GS1 gs
+0 792 612 -791.94 re
+f
+90 55 432 -10 re
+f
+108 756 396 -10 re
+f
+54 738 504 -666 re
+f
+BT
+/TT4 1 Tf
+10 0 0 10 54 731.33 Tm
+0 g
+0 Tc
+0.073 Tw
+(field of view as a system of representation for a PA layer.)Tj
+0 -1.2 TD
+0.072 Tw
+(We will now describe an implemented agent performing a)Tj
+T*
+-0.023 Tw
+(series of tasks to play a game of tag. This application allows)Tj
+T*
+-0.019 Tw
+(us to discuss important issues such as maintenance of repre-)Tj
+T*
+0.203 Tw
+(sentation, assessment of performance and behavioral de-)Tj
+T*
+0 Tw
+(scriptions.)Tj
+/TT2 1 Tf
+11 0 0 11 54 655.67 Tm
+[(4.3  T)92.4(ag: An A)25.3(pplication)]TJ
+/TT4 1 Tf
+10 0 0 10 64 640.3301 Tm
+-0.028 Tw
+(Our application is a two player game of tag. One player is)Tj
+-1 -1.2 TD
+-0.034 Tw
+(ìitî and must touch the other player, before that other player)Tj
+T*
+0.07 Tw
+(reaches a designated location called the home base. In our)Tj
+T*
+0.018 Tw
+(game, our autonomous agent, Bruce, is ìitî, while a human)Tj
+T*
+0.04 Tw
+(controlled vehicle \(the truck\) is the other player. Bruce be-)Tj
+T*
+0.119 Tw
+(gins the game with no knowledge of the truckís location.)Tj
+T*
+0.058 Tw
+(Bruce conducts a systematic search of his environment for)Tj
+T*
+0.039 Tw
+(his opponent, and attempts to touch \(ìtagî\) it upon discov-)Tj
+T*
+0.016 Tw
+(ery. The human controlled player is not allowed to ìrun for)Tj
+T*
+0 Tw
+(homeî until Bruce has spotted it and begun a chase.)Tj
+1 -1.4 TD
+0.11 Tw
+(Bruce is an 68HC11-based agent possessing tactile and)Tj
+-1 -1.2 TD
+0.038 Tw
+(visual sensors. A single color camera is mounted on a pan/)Tj
+T*
+-0.037 Tw
+(tilt platform on the agentís front and there are optical encod-)Tj
+T*
+-0.041 Tw
+(ers on its wheels. Offboard processing is facilitated by video)Tj
+T*
+0 Tw
+(and data link transmitters.)Tj
+/TT2 1 Tf
+11 0 0 11 54 454.67 Tm
+[(4.4  Repr)17.8(esentation Maintenance)]TJ
+/TT4 1 Tf
+10 0 0 10 64 439.33 Tm
+-0.062 Tw
+(The primary reason that many agents are designed with no)Tj
+-1 -1.2 TD
+0.134 Tw
+(representation at the perception/action level is because of)Tj
+T*
+0.045 Tw
+(the difficulty of accurately maintaining that representation.)Tj
+T*
+0.128 Tw
+(ìStaleî information leads to the selection of incorrect ac-)Tj
+T*
+-0.012 Tw
+(tions. The PA layer is not concerned with the ìtruth mainte-)Tj
+T*
+-0.025 Tw
+(nanceî of the sort of high-level predicates used by inference)Tj
+T*
+0.079 Tw
+(engines; rather it must keep the)Tj
+/TT9 1 Tf
+13.251 0 TD
+0 Tw
+(where)Tj
+/TT4 1 Tf
+3 0 TD
+0.079 Tw
+[( components of its)]TJ
+-16.251 -1.2 TD
+-0.026 Tw
+(markers up-to-date \(maintenance of the)Tj
+/TT9 1 Tf
+15.892 0 TD
+0 Tw
+(what)Tj
+/TT4 1 Tf
+2.4 0 TD
+-0.026 Tw
+[( component is)]TJ
+-18.292 -1.2 TD
+0 Tw
+(discussed in [4]\).)Tj
+1 -1.4 TD
+0.202 Tw
+(Since the effective field of view is used to select the)Tj
+-1 -1.2 TD
+0.068 Tw
+(agentís immediate actions, the agent must both execute its)Tj
+T*
+0.235 Tw
+(actions and update its markers in parallel. Consider the)Tj
+/TT2 1 Tf
+T*
+0 Tw
+(chase)Tj
+/TT4 1 Tf
+2.333 0 TD
+-0.05 Tw
+[( behavior which is initiated when Bruce detects his op-)]TJ
+-2.333 -1.2 TD
+0 Tw
+(ponent.)Tj
+/TT2 1 Tf
+3.193 0 TD
+(Chase)Tj
+/TT4 1 Tf
+2.611 0 TD
+-0.029 Tw
+[( consists of two parallel activities \(termed PA)]TJ
+-5.804 -1.2 TD
+-0.001 Tw
+(processes\). The first directs Bruceís pan/tilt unit, or ìneckî,)Tj
+T*
+-0.023 Tw
+(to point the camera at his opponent. The second controls the)Tj
+T*
+-0.02 Tw
+(wheels to move Bruce toward his opponent in order to com-)Tj
+T*
+0.034 Tw
+(plete a ìtagî. These PA processes consult the)Tj
+/TT2 1 Tf
+18.63 0 TD
+0 Tw
+(chase-target)Tj
+/TT4 1 Tf
+-18.63 -1.2 TD
+0.02 Tw
+(marker \(which has its)Tj
+/TT9 1 Tf
+8.969 0 TD
+0 Tw
+(identity)Tj
+/TT4 1 Tf
+4.8 0 TD
+0.02 Tw
+[( component set to)]TJ
+/TT2 1 Tf
+7.415 0 TD
+0 Tw
+(truck)Tj
+/TT4 1 Tf
+2.333 0 TD
+(\))Tj
+-23.517 -1.2 TD
+0.08 Tw
+(to determine where to direct the effectors under their con-)Tj
+T*
+0.021 Tw
+(trol, so it is important that the representation be maintained)Tj
+T*
+0 Tw
+(effectively.)Tj
+1 -1.4 TD
+0.022 Tw
+(In our PA layer, the effective field of view is maintained)Tj
+-1 -1.2 TD
+-0.016 Tw
+(by keeping the positions of all marked objects up-to-date. A)Tj
+T*
+0.212 Tw
+(markerís estimated position, in ego-centric polar coordi-)Tj
+T*
+0.124 Tw
+(nates, is calculated through a ìhypothesis and confirm \(if)Tj
+T*
+0.048 Tw
+(possible\)î process. The hypothesis is created from the pre-)Tj
+T*
+0.233 Tw
+(viously stored position and proprioceptive data, e.g. the)Tj
+T*
+0.018 Tw
+(most recent values read from the agentís drive shaft encod-)Tj
+T*
+-0.034 Tw
+(ers. If the hypothesized position should be visible in the cur-)Tj
+T*
+0.521 Tw
+(rent absolute field of view, the agent looks for a)Tj
+26.55 65.6 TD
+0.062 Tw
+(correspondent in the current image. If a correspondent can)Tj
+0 -1.2 TD
+-0.006 Tw
+(be found, the objectís position \(based on its azimuth and el-)Tj
+T*
+0.007 Tw
+(evation in the image with the assumption that all objects lie)Tj
+T*
+0.055 Tw
+(on the ground\) is stored instead of its expected location. If)Tj
+T*
+-0.016 Tw
+(the hypothesized position should not be visible, or no corre-)Tj
+T*
+-0.008 Tw
+(spondent is found, then that hypothesis becomes the current)Tj
+T*
+0 Tw
+(position.)Tj
+1 -1.4 TD
+0.197 Tw
+(Visual correspondence is done by finding the ground/)Tj
+-1 -1.2 TD
+0.059 Tw
+(non-ground boundary, or groundline [7]. Vertical disconti-)Tj
+T*
+0.013 Tw
+(nuities in this line represent the edges of objects \(see figure)Tj
+T*
+-0.022 Tw
+(1\). Each segmented image region is analyzed by each mark-)Tj
+T*
+0 Tw
+(erís)Tj
+/TT9 1 Tf
+1.716 0 TD
+(track)Tj
+/TT4 1 Tf
+3 0 TD
+-0.033 Tw
+[( routine \(example routines include histogram in-)]TJ
+-4.716 -1.2 TD
+0.002 Tw
+(tersection [10]\). Matching of markers to objects is based on)Tj
+T*
+0.005 Tw
+(results of the match determined by)Tj
+/TT9 1 Tf
+14.141 0 TD
+0 Tw
+(track)Tj
+/TT4 1 Tf
+3 0 TD
+0.0003 Tc
+0.0047 Tw
+( and the distance)Tj
+-17.141 -1.2 TD
+0 Tc
+0.011 Tw
+(between this objectís position and the position stored in the)Tj
+T*
+0 Tw
+(marker.)Tj
+1 -15.5 TD
+0.025 Tw
+(Now we can see one of the benefits of the effective field)Tj
+-1 -1.2 TD
+0.088 Tw
+(of view. The location of the truck may be computed from)Tj
+T*
+0.014 Tw
+(sensor data \(when the truck is in the absolute field of view\))Tj
+T*
+-0.031 Tw
+(or based on proprioceptive data \(such as when the truck is at)Tj
+T*
+0.035 Tw
+(an azimuth not visible at the current camera angle or is oc-)Tj
+T*
+-0.006 Tw
+(cluded\), but the PA processes operate the same in both situ-)Tj
+T*
+-0.003 Tw
+(ations. In this manner, the effective field of view provides a)Tj
+T*
+0.023 Tw
+(uniform access mechanism to all the information important)Tj
+T*
+0 Tw
+(to the agentís current task.)Tj
+/TT2 1 Tf
+12 0 0 12 319.5 282 Tm
+[(5.  P)74.2(A)0( LA)99.7(YER IN A COMPLETE A)56.3(GENT)]TJ
+/TT4 1 Tf
+10 0 0 10 329.5 266.33 Tm
+0.063 Tw
+(Many complex tasks, such as playing a game of tag, re-)Tj
+-1 -1.2 TD
+0.058 Tw
+(quire more deliberative capabilities than we consider to be)Tj
+T*
+-0.004 Tw
+(part of the PA layer. Many autonomous agent architectures,)Tj
+T*
+0.012 Tw
+([3][5][6], have several layers operating at different ìlevelsî)Tj
+T*
+0.21 Tw
+(of abstraction. Bruceís architecture also has three layers)Tj
+T*
+0.031 Tw
+([13]. For this application, the architecture has a specialized)Tj
+T*
+0.151 Tw
+(planner \(DL\) at the highest layer, and the previously de-)Tj
+T*
+-0.001 Tw
+(scribed PA layer at the lowest. In between is a management)Tj
+T*
+0.002 Tw
+(layer called the task executor \(TE\). In the following section)Tj
+T*
+0.024 Tw
+(we discuss how PA layer representation can be used by the)Tj
+T*
+0.03 Tw
+(TE. In particular, we address how the TE assists in playing)Tj
+T*
+-0.059 Tw
+(the game of tag. Finally we discuss issues involved in the de-)Tj
+T*
+0 Tw
+(sign of the TE and the DL to work with our PA layer.)Tj
+/TT2 1 Tf
+11 0 0 11 319.5 106.67 Tm
+[(5.1  Inf)25.6(ormation Flo)8.9(w)]TJ
+/TT4 1 Tf
+10 0 0 10 329.5 91.33 Tm
+-0.053 Tw
+(A PA layerís representation provides the other layers with)Tj
+-1 -1.2 TD
+0.018 Tw
+(a means of specifying goals and a mechanism for receiving)Tj
+1.104 33.4 TD
+0 Tw
+[(Figure 1.  The Groundline and the Agentí)53.6(s Opponent)]TJ
+ET
+1 g
+364.5 546 153 -117 re
+f
+q
+1 i 
+364.5 546 153 -117 re
+W n
+q
+135 0 0 124.43 373.5 420.0001 cm
+/Im1 Do
+Q
+Q
+endstream
+endobj
+16 0 obj
+<<
+/ProcSet [/PDF /Text /ImageC /ImageI]
+/Font <<
+/TT2 4 0 R
+/TT4 5 0 R
+/TT9 13 0 R
+>>
+/XObject <<
+/Im1 17 0 R
+>>
+/ExtGState <<
+/GS1 7 0 R
+>>
+/ColorSpace <<
+/Cs7 18 0 R
+>>
+>>
+endobj
+18 0 obj
+[/Indexed /DeviceRGB 255 19 0 R]
+endobj
+19 0 obj
+<<
+/Length 329
+/Filter /FlateDecode
+>>
+stream
+Hâb`√¸˘ÛÁ«è_æ|˘·√õ7o^ºxÒ‰…ì‹πsÁ∆çWÆ\πp·¬â'é9r‡¿Å={ˆÏÿ±cÀñ-6lX≥fÕä+ñ,Y≤`¡Ç9sÊÃò1c î)&LËÈÈÈËËhii©©©©®®()))((»………»»HIIââââàà			ÒÒÒpqq±±±±∞∞011100–———––PQQëëëëêê‡···‡‡`aa˘‡4C
+É±±±ÇÇBBB¬øˇÊÕõwÔﬁΩ‚‚‚gœûÕú9Û?É¬¶Uˇ˛;88444(u+•••=}˙tˇ˛˝ÎﬂΩ€∑oﬂñw[._æÃ¿pìÅ!ÑÅ°ÁÃô3.$Ô¯øÁ“ª…∑(|X›Ù?T™{¢Œªµ7û10 Õc¯ˇˇ?@Ä Â:õK
+endstream
+endobj
+21 0 obj
+<<
+/Length 11904
+>>
+stream
+1 g
+/GS1 gs
+0 792 612 -791.94 re
+f
+90 55 432 -10 re
+f
+108 756 396 -10 re
+f
+54 738 504 -666 re
+f
+BT
+/TT4 1 Tf
+10 0 0 10 54 731.33 Tm
+0 g
+0 Tc
+0 Tw
+(task-dependent, semantic knowledge about the world.)Tj
+1 -1.4 TD
+0.022 Tw
+(Consider the search task that is part of the tag game. Ini-)Tj
+-1 -1.2 TD
+-0.029 Tw
+(tially, Bruce does not know the location of his opponent and)Tj
+T*
+0.058 Tw
+(so must systematically search his environment. Bruce pos-)Tj
+T*
+0.147 Tw
+(sesses a map of his environment from which the planner)Tj
+T*
+0.096 Tw
+(generates a search route \(see figure 2\) such that all of the)Tj
+T*
+-0.016 Tw
+(game area will fall within the absolute field of view at some)Tj
+T*
+0.023 Tw
+(point [11]. However, the mapís ìglobalî coordinate system)Tj
+T*
+0.096 Tw
+(is fundamentally different than the local-space representa-)Tj
+T*
+0.051 Tw
+(tion of markers. The agentís position in this global coordi-)Tj
+T*
+0.08 Tw
+(nate system is the type of information which the PA layer)Tj
+T*
+0.024 Tw
+(cannot effectively maintain. Thus, we need a means for the)Tj
+T*
+-0.056 Tw
+(planner to communicate its goals to the PA layer in a manner)Tj
+T*
+0 Tw
+(suitable for effective action.)Tj
+1 -17 TD
+0.017 Tw
+(Figure 2 shows a plan to search the game area. The solid)Tj
+-1 -1.2 TD
+0.015 Tw
+(lines represent paths to travel, while the dashed lines repre-)Tj
+T*
+-0.046 Tw
+(sent points where the agent must turn its camera in the direc-)Tj
+T*
+0.002 Tw
+(tion indicated by the arrow. The agent is shown as a shaded)Tj
+T*
+0.089 Tw
+(pentagon with the point indicating its direction of motion.)Tj
+T*
+0 Tw
+(The cone indicates the agentís absolute field of view.)Tj
+1 -1.4 TD
+0.041 Tw
+(Figure 3a shows Bruce in the same position as the agent)Tj
+-1 -1.2 TD
+0.009 Tw
+(indicated in figure 2; near completion of step 3. In figure 3,)Tj
+T*
+-0.025 Tw
+(the white lines extending from the agentís camera denote its)Tj
+T*
+0.006 Tw
+(absolute field of view. Solid arrows indicate objects associ-)Tj
+T*
+-0.045 Tw
+(ated with instantiated markers, while dashed arrows indicate)Tj
+T*
+0.074 Tw
+(locations at which the TE expects to find a specific object)Tj
+T*
+0.013 Tw
+(that can be associated with an uninstantiated marker. When)Tj
+T*
+0.116 Tw
+(Bruce completes step 3, he must go toward the object la-)Tj
+T*
+0 Tw
+(beled)Tj
+/TT2 1 Tf
+2.546 0 TD
+(b3)Tj
+/TT4 1 Tf
+1.056 0 TD
+0.13 Tw
+[( which is outside of his current absolute field of)]TJ
+-3.602 -1.2 TD
+0.05 Tw
+(view. The TE directs the PA layer to do this by placing an)Tj
+/TT6 1 Tf
+T*
+0 Tw
+(uninstantiated)Tj
+/TT2 1 Tf
+6.075 0 TD
+(destination)Tj
+/TT4 1 Tf
+5.074 0 TD
+0.102 Tw
+(marker with identity)Tj
+/TT2 1 Tf
+8.721 0 TD
+0 Tw
+(b3)Tj
+/TT4 1 Tf
+1.056 0 TD
+0.102 Tw
+[( \(and a)]TJ
+/TT2 1 Tf
+-20.926 -1.2 TD
+0 Tw
+(goto)Tj
+/TT4 1 Tf
+1.833 0 TD
+-0.017 Tw
+[( action\) into the PA layerís effective field of view. This)]TJ
+-1.833 -1.2 TD
+0 Tw
+(is shown by the dashed arrow in figure 3b.)Tj
+1 -1.4 TD
+0.002 Tw
+(As Bruce begins to execute the)Tj
+/TT2 1 Tf
+12.677 0 TD
+0 Tw
+(goto)Tj
+/TT4 1 Tf
+1.833 0 TD
+0.0001 Tc
+0.0019 Tw
+( action of the current)Tj
+/TT2 1 Tf
+-15.51 -1.2 TD
+0 Tc
+0 Tw
+(destination)Tj
+/TT4 1 Tf
+4.723 0 TD
+0.141 Tw
+[( marker, as in figure 3c, the only information)]TJ
+-4.723 -1.2 TD
+0 Tw
+(about)Tj
+/TT2 1 Tf
+2.476 0 TD
+(b3)Tj
+/TT4 1 Tf
+1.056 0 TD
+0.005 Tw
+(ís position is that provided by the TE. The floating)Tj
+-3.532 -1.2 TD
+0.03 Tw
+(arrows in figures 3b and 3c show the general position indi-)Tj
+T*
+0.178 Tw
+(cated by the marker. When proprioceptive data indicates)Tj
+T*
+0.024 Tw
+(that the object on which Bruce would like to instantiate the)Tj
+T*
+0.039 Tw
+(marker should be within the current absolute field of view,)Tj
+T*
+0.205 Tw
+(the PA layer executes that markerís)Tj
+/TT9 1 Tf
+15.728 0 TD
+0 Tw
+(Locate)Tj
+/TT4 1 Tf
+3.6 0 TD
+0.205 Tw
+[( routine to)]TJ
+-19.328 -1.2 TD
+0.191 Tw
+(identify the object. If)Tj
+/TT2 1 Tf
+9.456 0 TD
+0 Tw
+(b3)Tj
+/TT4 1 Tf
+1.056 0 TD
+0.191 Tw
+[( is detected, the position in the)]TJ
+16.038 39.429 TD
+0.092 Tw
+(marker is replaced by the newly detected position and the)Tj
+0 -1.2 TD
+-0.006 Tw
+(marker is said to be instantiated. This is shown in figure 3d.)Tj
+T*
+0.015 Tw
+(Now the object associated \()Tj
+/TT2 1 Tf
+11.112 0 TD
+0 Tw
+(b3)Tj
+/TT4 1 Tf
+1.056 0 TD
+0.015 Tw
+(\)with the)Tj
+/TT2 1 Tf
+3.598 0 TD
+[( destination)]TJ
+/TT4 1 Tf
+5.252 0 TD
+0 Tw
+(marker)Tj
+-21.018 -1.2 TD
+0.171 Tw
+(can be tracked. It is important to note that this behavior)Tj
+T*
+0.002 Tw
+(would be difficult for a stateless system because in the situ-)Tj
+T*
+0.126 Tw
+(ation shown in figure 3b, there is no sensory information)Tj
+T*
+0.044 Tw
+(available to Bruce telling him the way to)Tj
+/TT2 1 Tf
+16.904 0 TD
+0 Tw
+(b3)Tj
+/TT4 1 Tf
+1.056 0 TD
+0.044 Tw
+(. The effective)Tj
+-17.96 -1.2 TD
+-0.026 Tw
+(field of view allows the PA layer to use information that has)Tj
+T*
+0 Tw
+(not been acquired by the agentís sensors.)Tj
+1 -1.4 TD
+-0.012 Tw
+(At the start of a round of tag, the PA layer is given an un-)Tj
+-1 -1.2 TD
+0 Tw
+(instantiated)Tj
+/TT2 1 Tf
+4.999 0 TD
+(chase-target)Tj
+/TT4 1 Tf
+5.22 0 TD
+0.138 Tw
+[( marker whose identity is)]TJ
+/TT2 1 Tf
+11.048 0 TD
+0 Tw
+(truck)Tj
+/TT4 1 Tf
+2.333 0 TD
+(.)Tj
+-23.6 -1.2 TD
+0.014 Tw
+(This marker contains no estimate of the truckís position, so)Tj
+T*
+0.009 Tw
+(the PA layer will try to instantiate the marker on any object)Tj
+T*
+0.027 Tw
+(matching the truckís sensory characteristics. The TE moni-)Tj
+T*
+-0.044 Tw
+(tors the PA layerís effective field of view to see if the)Tj
+/TT2 1 Tf
+21.184 0 TD
+0 Tw
+(chase-)Tj
+-21.184 -1.2 TD
+(target)Tj
+/TT4 1 Tf
+2.554 0 TD
+0.042 Tw
+[( marker becomes instantiated. If so, the TE will stop)]TJ
+-2.554 -1.2 TD
+-0.05 Tw
+(the current PA layer action \(by deleting the associated mark-)Tj
+T*
+0.039 Tw
+(er\) and will alter the)Tj
+/TT2 1 Tf
+8.554 0 TD
+0 Tw
+(chase-target)Tj
+/TT4 1 Tf
+5.22 0 TD
+0.039 Tw
+[( markerís)]TJ
+/TT9 1 Tf
+4.132 0 TD
+0 Tw
+(action)Tj
+/TT4 1 Tf
+3.6 0 TD
+0.039 Tw
+[( com-)]TJ
+-21.506 -1.2 TD
+-0.029 Tw
+(ponent to)Tj
+/TT2 1 Tf
+3.942 0 TD
+0 Tw
+(chase)Tj
+/TT4 1 Tf
+2.333 0 TD
+-0.029 Tw
+(. Playing tag then involves the above TE/PA)Tj
+-6.275 -1.2 TD
+0.024 Tw
+(layer interaction directing the agent to follow each ìlegî of)Tj
+T*
+0.021 Tw
+(the exploration route provided by the planning layer. As an)Tj
+T*
+-0.011 Tw
+(action completes, the associated marker may be dropped. In)Tj
+T*
+-0.006 Tw
+(figure 3a, there is a)Tj
+/TT2 1 Tf
+7.913 0 TD
+0 Tw
+(destination)Tj
+/TT4 1 Tf
+4.723 0 TD
+-0.006 Tw
+[( marker for)]TJ
+/TT2 1 Tf
+4.731 0 TD
+0 Tw
+(b5)Tj
+/TT4 1 Tf
+1.056 0 TD
+-0.006 Tw
+(, but in figure)Tj
+-18.423 -1.2 TD
+0.01 Tw
+(3b \(after)Tj
+/TT2 1 Tf
+3.684 0 TD
+(goto destination)Tj
+/TT4 1 Tf
+7.076 0 TD
+(has been completed\) that marker)Tj
+-10.76 -1.2 TD
+0.102 Tw
+(has been dropped because it is no longer important to the)Tj
+T*
+0 Tw
+(agentís current task of going to)Tj
+/TT2 1 Tf
+12.72 0 TD
+(b3)Tj
+/TT4 1 Tf
+1.056 0 TD
+(.)Tj
+/TT2 1 Tf
+11 0 0 11 319.5 151.95 Tm
+[(5.2  Design Of Other Lay)9.9(ers)]TJ
+/TT4 1 Tf
+10 0 0 10 329.5 136.62 Tm
+0.055 Tw
+(We have described Bruceís three layered architecture as)Tj
+-1 -1.2 TD
+0.095 Tw
+(having a planner, a middle-manager and a PA layer using)Tj
+T*
+-0.034 Tw
+(our effective field of view paradigm. This type of division is)Tj
+T*
+0.013 Tw
+(common among agent architectures today. However, repre-)Tj
+T*
+0.035 Tw
+(sentation at the PA layer provides new issues to be consid-)Tj
+T*
+0 Tw
+(ered in the design of the other layers.)Tj
+-6.271 45.521 TD
+(b4)Tj
+-17.348 0.36 TD
+(b2)Tj
+4.95 -4.167 TD
+(b5)Tj
+6.196 0.64 TD
+(can)Tj
+6.243 -5.113 TD
+(home)Tj
+-10.189 10.275 TD
+(b3)Tj
+ET
+0 G
+2 J 0 j 0.6 w 3.86 M []0 d
+1 i 
+79.31 446.53 27 -12.6 re
+250.31 462 36 -21.6 re
+250.99 552 21.6 -36 re
+151.31 565.6 18 -21.6 re
+79.31 559.2 18 -43.2 re
+128.81 504.93 18 -18 re
+201.66 516.72 m
+193.711 516.72 187.26 510.269 187.26 502.32 c
+187.26 494.371 193.711 487.92 201.66 487.92 c
+209.609 487.92 216.06 494.371 216.06 502.32 c
+216.06 510.269 209.609 516.72 201.66 516.72 c
+102.38 478.2 m
+167.18 485.4 l
+130.93 536.05 m
+166.93 485.65 l
+S
+BT
+/TT11 1 Tf
+10 0 0 10 209.31 445.74 Tm
+(1)Tj
+0.9 3.493 TD
+(2)Tj
+-2.7 -1.693 TD
+(3)Tj
+-2.7 4.393 TD
+(4)Tj
+2.3 1.907 TD
+(5)Tj
+4.208 -0.107 TD
+(6)Tj
+-10.108 1.907 TD
+(7)Tj
+-1.8 -5.4 TD
+(8)Tj
+2.3 -4.607 TD
+(9)Tj
+ET
+0 J 
+231.94 477.38 m
+240.47 483.99 l
+229.73 482.9 l
+230.84 480.14 l
+s
+231.94 477.38 m
+240.47 483.99 l
+229.73 482.9 l
+230.84 480.14 l
+f*
+2 J 
+208.79 471.32 m
+205.31 469.93 l
+S
+[7.221 6.258 ]7.221 d
+227.12 478.65 m
+208.79 471.32 l
+S
+[]0 d
+230.6 480.05 m
+227.12 478.65 l
+130.43 536.05 m
+114.532 536.05 101.63 510.245 101.63 478.45 c
+205.31 433.93 m
+205.31 469.93 l
+160.31 487.93 m
+205.31 469.93 l
+S
+0.5 g
+176.98 488.3 m
+189.81 481.76 l
+183.27 468.93 l
+170.45 475.47 l
+167.3 485.15 l
+b*
+160.31 534 m
+160.31 489 l
+223.31 543 m
+160.31 534 l
+S
+0 J 
+226.69 517.23 m
+232.09 507.88 l
+232.46 518.67 l
+229.58 517.95 l
+s
+0 g
+226.69 517.23 m
+232.09 507.88 l
+232.46 518.67 l
+229.58 517.95 l
+f*
+2 J 
+224.22 539.36 m
+223.31 543 l
+S
+[6.612 5.731 ]6.612 d
+228.6 521.83 m
+224.22 539.36 l
+S
+[]0 d
+229.51 518.19 m
+228.6 521.83 l
+115.31 540.93 m
+223.31 541.93 l
+S
+BT
+/TT4 1 Tf
+10 0 0 10 87.81 438.06 Tm
+(b1)Tj
+ET
+97.31 460.93 m
+115.31 541.93 l
+S
+0 J 
+121.89 445.32 m
+132.5 443.34 l
+124.55 450.64 l
+123.22 447.98 l
+s
+121.89 445.32 m
+132.5 443.34 l
+124.55 450.64 l
+123.22 447.98 l
+f*
+2 J 
+100.67 459.25 m
+97.31 460.93 l
+S
+[7.761 6.726 ]7.761 d
+119.64 449.77 m
+100.67 459.25 l
+S
+[]0 d
+123 448.09 m
+119.64 449.77 l
+S
+0 J 
+78.02 506.17 m
+70.72 514.12 l
+72.7 503.51 l
+75.36 504.84 l
+s
+78.02 506.17 m
+70.72 514.12 l
+72.7 503.51 l
+75.36 504.84 l
+f*
+2 J 
+95.64 464.28 m
+97.31 460.93 l
+S
+[8.987 7.788 ]8.987 d
+77.15 501.26 m
+95.64 464.28 l
+S
+[]0 d
+75.47 504.61 m
+77.15 501.26 l
+S
+BT
+/TT11 1 Tf
+10 0 0 10 70.31 487.93 Tm
+(10)Tj
+/TT4 1 Tf
+5.143 -6.86 TD
+(Figure 2. The Search Plan)Tj
+37.447 7.8 TD
+(\(d\))Tj
+ET
+1 g
+319.5 738 117 -117 re
+f
+q
+319.5 738 117 -117 re
+W n
+q
+119.04 0 0 115.2 318.9 622.8 cm
+/Im2 Do
+Q
+Q
+1 1 1 RG
+330 666.86 m
+370.72 671.14 l
+343.57 698.29 m
+371.43 671.14 l
+S
+0 J 
+323.7 701.18 m
+330.37 692.7 l
+329.21 703.43 l
+326.46 702.31 l
+s
+1 1 1 rg
+323.7 701.18 m
+330.37 692.7 l
+329.21 703.43 l
+326.46 702.31 l
+f*
+2 J 
+326.36 702.54 m
+322.86 711.14 l
+S
+q
+445.5 738 112.46 -117 re
+W n
+1 g
+445.5 738 112.46 -117 re
+f
+q
+114.24 0 0 115.2 445.4999 622.8 cm
+/Im3 Do
+Q
+444.29 680.43 m
+485 676.14 l
+462.14 712.57 m
+487.14 677.57 l
+S
+Q
+0 J 
+511.99 730.39 m
+502.53 725.2 l
+513.31 724.59 l
+512.65 727.49 l
+s
+511.99 730.39 m
+502.53 725.2 l
+513.31 724.59 l
+512.65 727.49 l
+f*
+2 J 
+516.55 728.38 m
+512.89 727.55 l
+S
+[5.817 5.042 ]5.817 d
+532.06 731.89 m
+516.55 728.38 l
+S
+[]0 d
+535.72 732.71 m
+532.06 731.89 l
+S
+BT
+10 0 0 10 382.21 484.33 Tm
+0 g
+[(Figure 3. Mark)9.9(er Instantiation)]TJ
+-1.2 13 TD
+[(\(a\))-11490.1(\(b\))]TJ
+0.06 -11.7 TD
+(\(c\))Tj
+ET
+q
+445.5 612 112.46 -108 re
+W n
+1 g
+445.5 612 112.46 -108 re
+f
+q
+113.28 0 0 109.44 445.86 502.5599 cm
+/Im4 Do
+Q
+Q
+478 591.14 m
+495.86 559.71 l
+510.86 594.71 m
+496.57 559.71 l
+S
+0 J 
+510.79 605.98 m
+500.41 603 l
+510.79 600.02 l
+510.79 603 l
+s
+1 1 1 rg
+510.79 605.98 m
+500.41 603 l
+510.79 600.02 l
+510.79 603 l
+f*
+2 J 
+535.5 603 m
+511.04 603 l
+S
+q
+445.5 612 112.46 -108 re
+W n
+1 g
+445.5 612 112.46 -108 re
+f
+Q
+q
+445.5 612 112.46 -108 re
+W n
+q
+113.28 0 0 109.44 445.86 502.5599 cm
+/Im4 Do
+Q
+Q
+478 591.14 m
+495.86 559.71 l
+510.86 594.71 m
+496.57 559.71 l
+S
+0 J 
+510.79 605.98 m
+500.41 603 l
+510.79 600.02 l
+510.79 603 l
+s
+510.79 605.98 m
+500.41 603 l
+510.79 600.02 l
+510.79 603 l
+f*
+2 J 
+535.5 603 m
+511.04 603 l
+346.5 589.43 m
+364.36 558 l
+379.36 593 m
+365.07 558 l
+S
+1 g
+319.79 612 116.71 -106.57 re
+f
+q
+319.79 612 116.71 -106.57 re
+W n
+q
+118.08 0 0 108.48 319.79 503.5199 cm
+/Im5 Do
+Q
+Q
+336.64 582.21 m
+367.38 559.55 l
+371.22 590.86 m
+367.38 559.55 l
+S
+0 J 
+350.64 597.54 m
+358.68 604.75 l
+348.05 602.9 l
+349.34 600.22 l
+s
+1 1 1 rg
+350.64 597.54 m
+358.68 604.75 l
+348.05 602.9 l
+349.34 600.22 l
+f*
+2 J 
+345.74 598.48 m
+349.12 600.11 l
+S
+[7.061 6.119 ]7.061 d
+328.38 590.06 m
+345.74 598.48 l
+S
+[]0 d
+325 588.43 m
+328.38 590.06 l
+S
+endstream
+endobj
+22 0 obj
+<<
+/ProcSet [/PDF /Text /ImageC /ImageI]
+/Font <<
+/TT2 4 0 R
+/TT4 5 0 R
+/TT6 6 0 R
+/TT9 13 0 R
+/TT11 23 0 R
+>>
+/XObject <<
+/Im2 24 0 R
+/Im3 25 0 R
+/Im4 26 0 R
+/Im5 27 0 R
+>>
+/ExtGState <<
+/GS1 7 0 R
+>>
+/ColorSpace <<
+/Cs8 28 0 R
+/Cs9 29 0 R
+/Cs10 30 0 R
+/Cs11 31 0 R
+>>
+>>
+endobj
+28 0 obj
+[/Indexed /DeviceRGB 255 32 0 R]
+endobj
+32 0 obj
+<<
+/Length 148
+/Filter /FlateDecode
+>>
+stream
+Hâbpg`0d∞aa`êˆ∞a`dàQa`∂Œà·ÀP.ØqWéÓ®—Î®ë¯Â<—|Näπsıä9~+æ)¨òcÒ?yc¯ûñ‰Ÿ'ˆ‰ùHn˝ø'‚Û≈Ú;K õwø∏”˜‚N≈ˇ≈ßˇ92}ÒÌˇ÷˝_|Ùˇüˇˇﬂ˛ˇ…ˆ√øˇˇ?˜üaåÇÅ  µÖ@~
+endstream
+endobj
+29 0 obj
+[/Indexed /DeviceRGB 255 33 0 R]
+endobj
+33 0 obj
+<<
+/Length 138
+/Filter /FlateDecode
+>>
+stream
+Hâbpg`0d∞aa`êˆ∞a`dàQa`∂Œà·Ààa∏•\(^„"Æ›Q£◊Q#ÒÀy¢˘úsÁÍs¸VÃ±¯üº1|OKxÚÏ{ÚNÏâ¯ﬂ|±¸ŒíÚÊ›/ÓÙΩX¸_uÒ«ÈéL_|˚ˇüuˇˇÃ¯¯ˇˆ√øˇˇ?˜üaåÇA  W8Ç
+endstream
+endobj
+30 0 obj
+[/Indexed /DeviceRGB 255 34 0 R]
+endobj
+34 0 obj
+<<
+/Length 141
+/Filter /FlateDecode
+>>
+stream
+Hâbpg`0d∞aa`êˆ∞a`dàQa`∂Œà·ÀP.ØqWéÓ®—Î®ë¯Â<—|Näπsıä9~+ÊX¸Oﬁæß%<yˆâ=y'ˆD¸o~Œ™˘øº˘b˘ù%ÂÕª_‹È{qß‚ˇ‚è”ˇôæ¯ˆˇ?Î˛˛ø˝ˇìÌáˇˇÓ?√(É  Üd:Ì
+endstream
+endobj
+31 0 obj
+[/Indexed /DeviceRGB 255 35 0 R]
+endobj
+35 0 obj
+<<
+/Length 134
+/Filter /FlateDecode
+>>
+stream
+Hâbpg`0d∞aa`êˆ∞a`dàQa`∂Œà·Ààa∏•\(^„"Æ›Q£◊°Ï˙´F‚óÛDÛ9)ÊŒ’+Ê¯≠òcÒ?yc¯ûñ‰Ÿ'ˆ‰ùÿÒø˘b˘ù%ÂÕª_‹È{±¯„Ù?G¶/æ˝ˇœ∫ˇáˇo?¸˚ˇˇsˇF¡(L  ¿ ¢s5ä
+endstream
+endobj
+37 0 obj
+<<
+/Length 9683
+>>
+stream
+1 g
+/GS1 gs
+0 792 612 -791.94 re
+f
+90 55 432 -10 re
+f
+108 756 396 -10 re
+f
+54 738 504 -666 re
+f
+BT
+/TT4 1 Tf
+10 0 0 10 64 731.33 Tm
+0 g
+0 Tc
+0.005 Tw
+(For example, the TE needs to bridge the gap between the)Tj
+-1 -1.2 TD
+-0.028 Tw
+(knowledge used by the planner and the ego-centric, task-de-)Tj
+T*
+0.09 Tw
+(pendent representations of markers. For the search task of)Tj
+T*
+0.034 Tw
+(the tag application, the TE must compute ego-centric coor-)Tj
+T*
+-0.001 Tw
+(dinates for the markers based on the map, knowledge of the)Tj
+T*
+-0.025 Tw
+(agentís starting position and the)Tj
+/TT9 1 Tf
+12.9 0 TD
+0 Tw
+(where)Tj
+/TT4 1 Tf
+3 0 TD
+-0.025 Tw
+[( components of pre-)]TJ
+-15.9 -1.2 TD
+0.055 Tw
+(vious markers when their associated)Tj
+/TT2 1 Tf
+15.02 0 TD
+0 Tw
+(goto)Tj
+/TT4 1 Tf
+1.833 0 TD
+0.055 Tw
+[( actions complet-)]TJ
+-16.853 -1.2 TD
+0 Tw
+(ed.)Tj
+1 -1.4 TD
+-0.001 Tw
+(Planners need to create plans that take into account agent)Tj
+-1 -1.2 TD
+0.076 Tw
+(capabilities. The physical size and mechanics of our agent)Tj
+T*
+0.051 Tw
+(place limits on the range over which purely proprioceptive)Tj
+T*
+0.178 Tw
+(data can be accurately computed. Thus an uninstantiated)Tj
+T*
+-0.019 Tw
+(marker which indicates its associated object to be outside of)Tj
+T*
+0 Tw
+(this range will likely not be effective for the)Tj
+/TT2 1 Tf
+17.858 0 TD
+(goto)Tj
+/TT4 1 Tf
+1.833 0 TD
+( task.)Tj
+/TT2 1 Tf
+12 0 0 12 54 557 Tm
+[(6.  RELA)95(TED W)10.3(ORK)]TJ
+/TT4 1 Tf
+10 0 0 10 64 541.3301 Tm
+0.15 Tw
+(There are a number of autonomous agent architectures)Tj
+-1 -1.2 TD
+0.098 Tw
+([3][5][6] utilizing multiple layers of activity. Their lowest)Tj
+T*
+0.009 Tw
+(layer, often analogous to our PA layer, is a collection of in-)Tj
+T*
+0.31 Tw
+(dependent behavior processes which communicate with)Tj
+T*
+0.055 Tw
+(each other and the upper layers through some channels [6])Tj
+T*
+0 Tw
+(or shared memory [5].)Tj
+1 -1.4 TD
+-0.029 Tw
+(Designing these behaviors is mostly an art. While this pa-)Tj
+-1 -1.2 TD
+-0.022 Tw
+(per does not alleviate the difficulties of behavioral design, it)Tj
+T*
+0.127 Tw
+(does seek to say something about the communication be-)Tj
+T*
+0.018 Tw
+(tween behaviors and the non-PA layers of an agentís archi-)Tj
+T*
+0.033 Tw
+(tecture. Work such as [6] and [5] allows communication to)Tj
+T*
+-0.059 Tw
+(be unstructured and arbitrary. We have defined a more struc-)Tj
+T*
+-0.033 Tw
+(tured communication mechanism via the passing of markers)Tj
+T*
+0.106 Tw
+(associated with task-dependent roles. We believe that this)Tj
+T*
+0.071 Tw
+(interface allows the effective exchange of important infor-)Tj
+T*
+-0.025 Tw
+(mation between behaviors or between behaviors and the up-)Tj
+T*
+0.072 Tw
+(per layers of an architecture. This gives the upper layers a)Tj
+T*
+0.047 Tw
+(useful and straightforward paradigm for instructing the PA)Tj
+T*
+0 Tw
+(layer without over-constraining its options.)Tj
+1 -1.4 TD
+0.162 Tw
+(Spectorís supervenience model [9] consists of a set of)Tj
+-1 -1.2 TD
+-0.046 Tw
+(communicating levels in which lower levels pass facts about)Tj
+T*
+0.16 Tw
+(the world to higher levels while higher levels pass goals)Tj
+T*
+-0.028 Tw
+(down to lower levels. Each level in the supervenience archi-)Tj
+T*
+0.17 Tw
+(tecture contains a knowledge base accessible as a black-)Tj
+T*
+0.186 Tw
+(board system. Uniform knowledge structures are used at)Tj
+T*
+0.114 Tw
+(each level. We have presented a knowledge structure, the)Tj
+T*
+0.03 Tw
+(marker, for use by a PA layer. We believe that the types of)Tj
+T*
+0.063 Tw
+(knowledge structures needed to perform the tasks required)Tj
+T*
+0.015 Tw
+(of higher levels are different than those that are usable by a)Tj
+T*
+0.103 Tw
+(PA layer in a dynamic environment. These ìhigher levelî)Tj
+T*
+0.017 Tw
+(structures may contain more information than can be effec-)Tj
+T*
+-0.034 Tw
+(tively maintained by a PA layer. It is important to design the)Tj
+T*
+0.092 Tw
+(knowledge structures of the PA layer carefully so that the)Tj
+T*
+0.102 Tw
+(advantages of the knowledge are obtained while real-time)Tj
+T*
+0 Tw
+(performance remains robust.)Tj
+/TT2 1 Tf
+12 0 0 12 54 113 Tm
+(7.  CONCLUSIONS)Tj
+/TT4 1 Tf
+10 0 0 10 64 97.33 Tm
+0.063 Tw
+(We have developed a situated controller which incorpo-)Tj
+-1 -1.2 TD
+-0.007 Tw
+(rates task dependent representations. This perception/action)Tj
+26.55 64.6 TD
+0.127 Tw
+(layer comprises a stateless reactive system with a limited)Tj
+0 -1.2 TD
+0 Tw
+(amount of task-dependent representation.)Tj
+1 -1.4 TD
+(We have developed an organizational structure for repre-)Tj
+-1 -1.2 TD
+0.012 Tw
+(sentation at the PA layer \(markers\) and described an access)Tj
+T*
+-0.042 Tw
+(mechanism for that information \(the effective field of view\).)Tj
+T*
+0.152 Tw
+(These representations are compact, maintainable, and en-)Tj
+T*
+-0.059 Tw
+(able the PA layer to perform some task more effectively than)Tj
+T*
+-0.047 Tw
+(a stateless system. Finally we discussed a complete agent ar-)Tj
+T*
+0.108 Tw
+(chitecture using a PA layer in the context of the tag task.)Tj
+T*
+0.079 Tw
+(Marker based representations allowed our agentís plans to)Tj
+T*
+-0.041 Tw
+(be communicated to its PA layer. We have demonstrated the)Tj
+T*
+-0.032 Tw
+(utility and effectiveness of this approach on a physical robot)Tj
+T*
+-0.011 Tw
+(performing a non-trivial real world task containing both dy-)Tj
+T*
+0 Tw
+(namic and statically planned components.)Tj
+1 -1.4 TD
+0.012 Tw
+(Representation has long been the subject of debate in the)Tj
+-1 -1.2 TD
+0.076 Tw
+(research community. We have created an agent which can)Tj
+T*
+0.213 Tw
+(use representation both efficiently and effectively in the)Tj
+T*
+0.166 Tw
+(lowest layer of its software architecture. We believe this)Tj
+T*
+0.079 Tw
+(constitutes an important step toward the integration of dy-)Tj
+T*
+0 Tw
+(namic actions and cognitive activities.)Tj
+/TT2 1 Tf
+12 0 0 12 319.5 483 Tm
+(8.  REFERENCES)Tj
+/TT4 1 Tf
+9 0 0 9 319.5 468 Tm
+-0.0111 Tw
+[([1] Agre, P)111.2(.E.; and Chapman, D. 1987. Pengi: An Implementation)]TJ
+0 -1.2222 TD
+0 Tw
+[(of a Theory of Acti)23.7(vity)65.7(.)]TJ
+/TT6 1 Tf
+9.6856 0 TD
+(AAAI-87)Tj
+/TT4 1 Tf
+3.5 0 TD
+(: 268-272.)Tj
+-13.1856 -1.4445 TD
+-0.0178 Tw
+[([2] Attnea)19.3(v)15.6(e, F)80(.; and F)14.5(arrar)40.1(, P)111.7(.)0( 1977. The V)59.1(isual W)80.3(orld Behind the)]TJ
+0 -1.2222 TD
+0 Tw
+(Head,)Tj
+/TT6 1 Tf
+2.61 0 TD
+[(American J)24.9(ournal of Psyc)14.7(holo)8.9(gy)]TJ
+/TT4 1 Tf
+13.0867 0 TD
+( 90\(4\): 549-563.)Tj
+-15.6967 -1.4444 TD
+[([3] Bonasso, R.P)111.7(.; and K)35(ortenkamp, D. 1995. Characterizing an)]TJ
+0 -1.2222 TD
+-0.0211 Tw
+[(Architecture for Intelligent, Reacti)22.7(v)14.4(e)0( Agents.)]TJ
+/TT6 1 Tf
+18.21 0 TD
+(AAAI Spring Sympo-)Tj
+-18.21 -1.2222 TD
+0 Tw
+[(sium)-249.7(on Softwar)36.3(e Ar)37.2(c)15(hitectur)35.9(es)]TJ
+/TT4 1 Tf
+12.4567 0 TD
+(.)Tj
+-12.4567 -1.4444 TD
+[([4] Brill, F)80.1(.Z. 1996. Representation of Local Space in Perception/)]TJ
+0 -1.2222 TD
+[(Action Systems: Beha)19.3(ving Appropriately in Dif)]TJ
+/TT7 1 Tf
+19.0933 0 TD
+(ﬁ)Tj
+/TT4 1 Tf
+0.5562 0 TD
+(cult Situations.)Tj
+-19.6495 -1.2222 TD
+-0.0411 Tw
+[(Ph.D. Dissertation, Department of Computer Science, Uni)21.8(v)64.4(.)0( of V)135.2(A)0(.)]TJ
+0 -1.4444 TD
+-0.0189 Tw
+[([5] Firby)65.2(, R.J.; and Slack, M.G. 1995. T)78.3(ask Ex)15(ecution: Interf)9.7(acing)]TJ
+0 -1.2222 TD
+0 Tw
+[(to Reacti)24.3(v)14.4(e)0( Skill Netw)9.5(orks.)]TJ
+/TT6 1 Tf
+11.2556 0 TD
+[(AAAI Spring Symposium on Softwar)37.3(e)]TJ
+-11.2556 -1.2222 TD
+[(Ar)36.7(c)15(hitectur)37(es)]TJ
+/TT4 1 Tf
+5.2989 0 TD
+(.)Tj
+-5.2989 -1.4444 TD
+-0.0122 Tw
+[([6] Gat, E. 1992. Inte)13.2(grating Planning and Reacting in a Heteroge-)]TJ
+0 -1.2222 TD
+0 Tw
+[(neous Asynchronous Architecture for Controlling Real-W)78.6(orld)]TJ
+T*
+(Mobile Robots.)Tj
+/TT6 1 Tf
+6.4733 0 TD
+(AAAI-92)Tj
+/TT4 1 Tf
+3.4989 0 TD
+(: 809-815.)Tj
+-9.9722 -1.4444 TD
+[([7] Horswill, I. 1993. Polly: A V)59.7(ision-Based Arti)]TJ
+/TT7 1 Tf
+19.6059 0 TD
+(ﬁ)Tj
+/TT4 1 Tf
+0.5562 0 TD
+(cial Agent.)Tj
+/TT6 1 Tf
+-20.162 -1.2222 TD
+(AAAI-93)Tj
+/TT4 1 Tf
+3.4989 0 TD
+(: 824-829.)Tj
+-3.4989 -1.4444 TD
+-0.0456 Tw
+[([8] Pylysh)5.8(yn, Z.W)91.4(.; and Storm R.W)92.9(. 1988. T)35.3(racking Multiple Inde-)]TJ
+0 -1.2222 TD
+0 Tw
+[(pendent T)79.7(a)0(r)18(gets: Evidence for a P)13.8(arallel T)33.3(racking Mechanism.)]TJ
+/TT6 1 Tf
+T*
+[(Spatial V)73.2(ision)]TJ
+/TT4 1 Tf
+5.5656 0 TD
+( 3\(3\):179-197.)Tj
+-5.5656 -1.4444 TD
+[([9] Spector)39.6(, L. 1992. Planning and Reacting Across Superv)13.8(enient)]TJ
+0 -1.2222 TD
+[(Le)24.7(v)14.4(els of Representation.)]TJ
+/TT6 1 Tf
+10.4578 0 TD
+[(International J)24.5(ournal of Intellig)8.6(ent and)]TJ
+-10.4578 -1.2222 TD
+[(Cooper)15.6(ative Information Systems)]TJ
+/TT4 1 Tf
+13.3733 0 TD
+( 1\(3 & 4\): 411-449.)Tj
+-13.3733 -1.4444 TD
+[([10] Sw)9.9(ain M.J.; and Ballard D.H. 1991. Color Inde)14.1(xing.)]TJ
+/TT6 1 Tf
+23.1122 0 TD
+(Interna-)Tj
+-23.1122 -1.2222 TD
+[(tional J)24(ournal of Computer V)74.6(ision)]TJ
+/TT4 1 Tf
+13.68 0 TD
+(. 7\(1\):11-32.)Tj
+-13.68 -1.4444 TD
+[([11] T)80.2(aylor)39.1(, C.J.; and Krie)14.7(gman, D.J. 1994. V)60.7(ision-Based Motion)]TJ
+0 -1.2222 TD
+(Planning and Exploration Algorithms for Mobile Robots.)Tj
+/TT6 1 Tf
+23.1667 0 TD
+[(W)91.9(ork-)]TJ
+-23.1667 -1.2222 TD
+[(shop on the Algorithmic F)104.6(oundation of Robotics)]TJ
+/TT4 1 Tf
+19.2289 0 TD
+(.)Tj
+-19.2289 -1.4444 TD
+[([12] Ullman, S. 1984. V)59.4(isual Routines.)]TJ
+/TT6 1 Tf
+15.8289 0 TD
+[(Co)10.3(gnition)]TJ
+/TT4 1 Tf
+3.9911 0 TD
+( 18:97-159.)Tj
+-19.82 -1.4444 TD
+[([13] W)79.9(asson, G.; and Martin, W)91.5(.)0( 1996. Inte)14.7(gration and Action in)]TJ
+0 -1.2222 TD
+(Perception/Action Systems with Access to Non-local Space Infor-)Tj
+T*
+(mation.)Tj
+/TT6 1 Tf
+3.2778 0 TD
+(AAAI workshop on Theories of Planning Action and Con-)Tj
+-3.2778 -1.2222 TD
+[(tr)44.8(ol: Bridging the Gap)]TJ
+/TT4 1 Tf
+8.9833 0 TD
+(.)Tj
+ET
+endstream
+endobj
+38 0 obj
+<<
+/ProcSet [/PDF /Text ]
+/Font <<
+/TT2 4 0 R
+/TT4 5 0 R
+/TT6 6 0 R
+/TT7 12 0 R
+/TT9 13 0 R
+>>
+/ExtGState <<
+/GS1 7 0 R
+>>
+>>
+endobj
+17 0 obj
+<<
+/Type /XObject
+/Subtype /Image
+/Width 128
+/Height 128
+/BitsPerComponent 8
+/ColorSpace 18 0 R
+/Length 16385
+>>
+stream
+¨¨≠Ø≠Æ≠Æ≠≠≠≠ÆÆÆÆØØÆ≠¨≠¨∫””””’‘‘‘‘”€Ã ∆¡ø‹û®Ω®“”Ø«∏∑∑ªπµ∂∞ƒ∂¥∞±≥∞µûü¶Œœ€——“““““““”””””‘‘‘‘‘‘‘‘‘‘‘‘”“–€‘‘‘‘‘‘’‹ÕÕ€“““””””””‘‘””‘‘‘¨¨¨¨´¨¨¨¨¨¨≠≠≠ÆÆÆÆÆ¨´´¨Ã“”””’‘’‘‘€¿Û®¢§Û≠ü≈≈∫”“√…¿ºªΩº¨¨∑Ω®Æ††´¶®†£——“”””””””‘‘‘‘‘‘‘‘‘‘‘‘‘‘‘‘‘‘‘‘‘‘”—“‘‘”’’‘€—“”””””””””‘‘‘‘‘‘‘‘¨¨´≠™¨¨¨¨´´¨≠≠≠ÆØÆÆ¨´´≠—“”””’‘‘‘’‹†•´ØÆ¨®¢Ω«ÀÕ€∑øº≤±∫≤≤™™¨™∑≥≤¥≤•†∂”””‘‘‘‘‘‘‘‘‘‘‘‘‘‘‘‘‘‘”‘‘‘‘‘‘‘‘’‘‘‘“”‘“’’‘”””””””””””‘‘‘‘‘‘‘‘‘Ø¨™¨´´´¨´´´¨¨≠≠ÆØÆÆ≠¨¨≠”””””’‘’‘’¬†°¥¡≈≈»Ê≈ŒœÀ€ªΩƒø¿…¡‹∑ƒ≈∂»«∆«««±À‘‘‘‘‘‘‘‘‘‘‘‘”””—€–œŒÕÃÃÕÕŒœ“‘’‘’’’‘“‘—’’‘”””””””””””‘‘‘‘‘‘‘’‘≤¨Û´™≠≠≠´™´≠≠¨¨ÆØÆ≠Æ¨≠Æ’””””‘‘‘‘’ÀÆƒÕŒŒœœ–€œ———————€—€€‹——æ—€€€€€€“‘—ŒÃÕŒŒŒŒÕÕÕÃÃÃÃÃÃÃÃÕŒÕÃÃÃÀÃŒ“’’’’‘‘”“’’‘”””””””””””‘‘‘‘‘‘’’’¥¨©™≤µµØ™´¨ÆÆ≠≠ÆÆÆÆ≠≠≠≠÷”””””‘‘’’”‘‘‘‘‘‘‘‘’“’’’’’‘‘‘‘‘’∆’’¿‘”””””””Õ¡ºø‹«Ê  ÀÃÃÃÕÕÃÃÃÃÃÕÕŒÃÃÃÃÃÃÃ–’’’’’”‘’’”””””””””””‘‘‘‘‘‘‘‘’’≤¨®Æ¥∑∏≤Û™Æ≥≥ÆÆØØÆ≠≠¨≠Æ÷’’’”—”’’’‘’’’’’’‘‘‘‘‘‘‘‘‘‘‘‘””‘∆‘‘¿”“““““““–¡Ωø∆ƒ» ÀÕŒŒŒŒŒœœœŒÕÕÕÕÃÃÃÃÃÃÃÃŒ’’’’‘‘‘’“”””””””””””‘‘‘‘‘‘‘’‘¨Û¶≥∞∂∂∞©™∞∑∏Ø¨Ø≥∞Æ≠≠≠±÷’’’‘”“’’’‘‘‘‘‘‘‘‘‘‘‘‘‘‘‘‘‘‘‘‘‘’∆‘‘¬‘”””””””‘Ê‹æ¿√≈ÊÃ–—““””””””€œŒŒŒŒŒÕÕÕÕÕÕœ’’’’‘‘’“””“””””””””‘‘‘‘‘“”““©ß•ÆØµØÛ¶Û¥∑∑ÆÛ±∑≥Æ∞Æ≠¥÷’’’’‘”‘’’’’’’’’’’’’’’’’’’’’’‘’÷∆÷÷‹÷’’’’’’’‘“Êƒ≈… ÀÕ“‘‘‘‘‘‘‘‘’‘—–œœœŒÕÕÕÕÕÕÃ‘’’‘‘’‘“””““”””””””””‘‘‘€——€ß••ÛØ≤ß•§Û≤∏±™Û≥∂≤Û∂Ø≠∫÷‘’’’’‘”’’÷‘‘‘‘‘‘‘‘‘‘‘’’’’‘‘‘“’’≈’’¬’‘‘‘‘”‘””’€Ê ÀÀÀ““““““““““’’‘“–œœŒŒŒÕÕÕŒŒ–’’’’’““““““““““””””””‘”€€€–•§•ÛØÆ£§¢Û≤µ´ßÛ±∂ÆÛ∫Ø≤æ’‘‘’’’’‘’÷÷”””””“”“””“‘’””””—”””∆‘”¡‘“““““””“‘‘œÀÀÀŒÕŒœ––€€€€—’’’’”€–œ–œ–€—”‘‘’‘’’’—““———““—““““”””””€€€–•£§©ØÆ¢££Û±≤ß§ÛÆ≤®Û∫≠∑√’‘‘’’’’’’÷÷———————————’’””””—”““«””¿”““““———“‘‘“—€–—““””””””””’’’’’—–œ‘‘‘‘‘‘‘‘‘‘‘’—–€€€€€—€€€———“““”“€€€€§£§ÛØ≠¢¢¢Û∞Æ•¢Û´™•Û∑™∂«‘‘‘‘‘’’’÷’÷€“——“——€€€€’‘“““—“”“—…““¿”“““—€€€€‘‘‘“””””””””””””‘’’’’’”€œ”‘‘‘‘‘‘‘”‘’—Ω¿√¬¬√√ √∆«ÀÀÕÃŒœ–€€“—€££§ÛÆ´¢¢¢Û∞´§°Û™®•®≤©ÆÀ’’’‘‘’’÷÷÷÷Ã€€€—€€—€—€‘‘—““——“——À“—¡“———€€€€€”‘”“””“”‘‘‘‘‘‘‘‘‘’’’’’’—–€‘””“€–œŒ÷÷√≤±∑´™Û®º†£¢µ™Æ´∞∂π∆–—€–£¢§©Æ™°¢¢©ØÛ£°™Û¶§ßØ©©–’’’’’’’÷÷÷÷»€ÊÊ ÃÀÃÃ€Õ’”€——————€Ã“€‹—–€––œŒ€–‘‘”——“€œ‘‘‘‘‘‘’’’’’’’’’‘€––––ŒŒŒŒÕ÷‘∂∂∑Ω≥Ø¨™π£§£ª™©´∞¥∑«–€—€£¢§©≠Û°¢¢©Ø®£¢™©¶§¶Æ®ß”’’’’‘”’’’÷÷«œ∆∆≈…≈« œÃ’”€ŒŒÕÃŒŒÃ…—–≈ÕÀÀÃÊ…≈Àœ‘”—–€–Œœ–“”””‘’’’’’’’’’‘“€–––œŒŒŒŒ÷ÊÁø‹»√Ω¥Øµ∞Æ™Ω¨¨Ø¥∏ª ŒŒœŒ¢¢§©¨®¢¢¢©Ø®¢°©©•§•´®•’’’’’’’‘–”‘÷∆œ»»ƒ«≈ø√ŒÀ’“€œÃ«…ÃÃÀ…—œ»Ã »…≈≥æ«À‘”€œ–œÕÕ€‘””‘‘’’’’’’’’’’‘—–€€–ŒŒŒ“” …ÊÀÕÃ…ƒ¡‹Àº∑≈∫πÁø¿¿ÀŒŒœŒ¢¢£®¨ß°°¢©Æ¶°°Û®§£•Û®•÷‘’’’’’’—€“‘∆Œ…»≈∆≈∫√ŒÀ’€œŒÀƒ… À «—Ã……«¬‹æ∑æ …”“–Œ€œÕ€”‘‘””‘’’’’’’’’’’’”€–€–œœ€‘€œÕŒŒŒŒÀÃÕÕ€ÀÀ–ÀÀÃŒÃÀÕŒŒœŒ¢¢£®¨ß°¢¢©Æ§°°Û®§§•©ß§◊’‘’’’’’“€—‘≈–ŒŒŒŒŒŒŒ€Œ’œœÃÊ…ÊÊ Ê≈€ÊÊ»»««∆∆∆Õ«”“œŒ–œœ”“€”““‘‘’’’’’’’’’’”€€––€“‘€”œœŒœœœŒŒœŒ€œœ—––––€€ÃœŒœŒ¢°§®´¶°°¢©≠£°°©®£§•®®¶÷’”’’’’’“€€”º»ƒ‹À––€€–À‘ŒŒŒŒŒ––––…œ«…ÃÀÕŒŒœœ–∆“—ŒŒŒ–“—“”‘”“”‘‘‘’’’’’’’’”“—““”’”—’–œ–––€–œœ–€€–—€€€€€—ÀÕœœÕ¢°£®´•°°¢®Æ¢°°®®£§•ßß®◊’”’’”’’€œ€—Á‹™•ƒ––€€œÀ‘«‹¬ªΩ––––»Œ∫º≥≠øœŒŒœ–≈€–  Õ“‘«»Ã€€–Ã—‘‘’’’’’’’’’’’’—“’”—‘––––€€€––€€—€“€€€€——ÊÕœ–…¢°£®´§†°¢®≠°°¢ßß£§¶•ßÛ÷’”‘◊º÷‘ƒœ€€πº≤•»€€–€ŒÀ‘ƒ‹º¶®€–––»ÕÁΩ¶†∫œŒŒœ–≈—Õ……“’–»……€€€ÃÕ”‘‘‘’’‘’’’’’’’—”’”—‘€€€€—€€€€€€—€“€–———“» ÃÕÃ¢°¢®™§††¢ß≠°†¢ßß£§¶•ß´’’”‘◊∏◊”ƒ–––∫ºµ¶ €€€€ŒÃ’‹øΩ´©—–––«ÕªÁ≠üΩœœŒœ–≈—Ã Ã’‘…ÊÊ –€€ÕÕ‘“¬’‘’’’’’’‘÷‘“”’”“‘—€€€———€€€———““”‘‘‘“∆ÊÀÀÀ°°¢®™£††¢®≠††£¶®¢§ß•¶≤’’”‘◊∑’—ƒ–€œ∏≤±µÀ€€€€ÕÃ’¬Á∫´™“€€€…Ã∫∑©§¿œœœœ–∆—ÀÊ‘’Œ………À––€Œ”’∆Æ÷‘’’’’’’‘’‘“”’““’—€€——“—————““““€‘’”“√…Ê Ê°°¢ßÛ¢††¢ß≠ü†£¶ß¢§®••∏‘’”‘◊∂¡º∆–€Õµ©∞µÀ€€€€ÃÃ’¡∑±π±“€€€ Ã∑±´≥¡œœœœœ«— Ã‘—…»»…Àœ–€—”‘œ∆“‘’’÷’’’‘’‘“‘’““’—————“—————”““”’’’‘—¬∆»Ê≈°°¢ß©¢††¢ß≠ü†§•¶¢§©•§ø‘’‘‘◊µπ≥«€€ÕØÆ™©Œœœœ–ÀŒ‘æ∑™Á≤—––œ Ê∏ÆÆ≥¬ŒŒœœŒ…€ À Ã»»»» Õœ“’Õ‘—≈—‘’’’÷’’’’‘“‘’“““—————”—————“”“””’÷‘–¿ƒ∆»…°°¢ß©°††¢®¨††§•¶¢£©•§≈‘’‘‘÷∂∫∂»–€“ŒÕÃ ÃÃÃÃÕÃ–”øªπµµŒÃÃæƒ»∑∂≠¨ƒÊ…  Õ…œ«∆∆«»»…Ê Œ”’€À‘‘¬€‘’’’÷’’’’‘“‘’“—“—————”———“““”””‘’’‘œ¬ÃÃÃÀ°†¢ß®°††¢ß¨ü†••¶¢£Û§£Ã‘’”‘◊∞π∂…–€”œ–––œœœœœŒ€ÕÊ…»»»»…‹ºÃ…≈∆∫ƒ¡ø¿¬‹…≈≈∫ºÁÁÁªæø‹€’‘ÀŒ‘’øŒ‘’’’’’’‘÷‘“‘’“““—————”————““””‘‘’’‘œÊ÷’’’°†¢ßß°††¢®´††§¶•¢£©§£€‘’”‘◊≤π∑ÊŒ€”ÕŒŒÕÊÊÊ ÀÊ–ÀÃ Ê…»»»Á ÃÊƒ«æƒ¬¡¡øƒ»¬√∫¬¿æªººª≈÷‘œ‘‘‘’ø ‘‘’’’’’‘’‘“’’“““—————“——““““””‘‘’‘‘«æ÷€÷’††°¶ß†††¢®™††•¶§¢¢®•¢‘‘’”‘÷≥∫∂ÊÕ€‘ÀÃÀÊ»…………«– ŒÀ ……»»º«ÃÕ¬…√√‹¬¡ø‹≈‹‹∫ÁÁºΩºº∫œ‘ÕÊ’€€”¬»‘‘”’’’‘‘’”“’’“““——————“—““““‘“”‘‘‘‘√¡——””††°¶ß†††£®Û††•¶§¢¢ß•°’‘’‘‘÷≥πµ…Œ€‘ÊŒÕÀ À…  «–ÊœÃ ÃÕ»Ê√«Ã Ω»»Á≈»√‹√ƒ∆¿æ¿¿ø¬√¡ºÀœ¿ ÷ÀÃ–≈≈‘“Œ’‘’€–——€‘’—““——————”—“—““‘“””””‘ƒºø¬ƒ≈††°¶ß†††£©©††•¶£¢¢¶§£÷‘’”‘÷±π¥«œ€”…œŒÃÀ ÀÀÃ∆–…–ÃÀÃÀÊ …≈Õ≈∏…»º««≈«≈»»ææ¡¿‹ƒ≈√√√«‹Ã’ÀÀ“«‹’”Œ—““ŒŒœœœ‘’—““——————”—““““‘””””‘‘¬æ¿‹ƒ≈††°¶¶†††£®ß††•¶¢¢¢•••◊‘’”’÷ÆÁ≥…œ€‘»Õ …»∆≈√≈∆œ…Ã »…»∆ƒ∆√Ã√ø««Ωƒ≈ƒ√ƒ »Ω√¿æ¿‹≈∆ƒ∆…≈Õ’ Ê”»¡’‘““—€€–œŒŒ’’————€—€€—“——“““””””””‘¿¡‹ƒ∆∆††°•¶†††£®¶††••¢£¢§¶ß◊‘’”’÷ÆÁµ«œ€”∆À……»∆¬¬ƒ≈œ»ÊÊ…»∆√¬√»…Áƒ‹≈¬‹√¿ººÊ«Áƒ≠ÛÛÛ±≤¥∂º∆Œ‘«∆“ ¡’‘‘‘‘‘‘‘œÃÃ’‘€———€€€€€—————“”””‘””‘ºΩ¿‹ƒ≈††°¶¶ü††£®•††••¢£¢§•©÷‘’”’÷Æπµ«œ€”≈ »»∆√¡¡ƒƒœ«…Ê«∆ƒ¬¡√∆Õ∆¬‹≈‹æ¬ÁÁª ‹∫≈±∞Æ®≤Æµ∂º≈–‘√¡”Õø’‘‘’‘‘‘‘Œ …’‘€——€€€€€€—“———“”“”‘””‘ªΩø¬√√††°•¶ü††£®§††•§¢£¢£¶´’‘’”‘÷≠∑±∆œ–“ƒÊ»«∆√¡¿√‹œ∆»Ê«ƒƒ¡¡√∆Œ»ø‹ƒƒªøÁ∫ªÀ¡∏∆µµØ™±Ø¥µæ≈€‘¡¬”Œæ÷”—“““““Ã…«’‘€€€€€€€€€—“———“”“””””‘Á¬‹ƒ∆≈††°••ü††£®§††§•°£¢£•∞’‘’”’’™µ∞ƒŒ–”√Ê»«ƒ√¡¿√¬œ≈∆ ∆‹‹¿¿‹∆œ ª¬√√ÁøÁπÁÀ¡∏»∏π∑¥∂∑π∫¬√—”ÊÊ”–Ω÷“ÃÃÕÕÕÕÃ …÷”€€€€––––€€“€—““”“”””””∏Ωø¬√√††°•¶ü††£®¢††§§¢£££§∂‘‘’”‘’™µÆƒÕ–”‹ Ê…«∆∆≈≈¡œƒ∆Õ«ƒƒ√√ƒƒœÊ∫√ƒ‹Ω¿Áªø…¿±¬‹¬‹…‹«… À√“”≈…”—Á’€ÊÊ  ÀÀœŒÃ÷”€€€––––––€—€——”““”””””∏Ω¿¡‹‹††°••ü††£ß¢††§§¢£££§ª““”””‘∫ø∏»Õ–“¬ ŒŒŒÕÕÕ«¿œƒÊ–ÕÕÕÃÃ«√œ»‹«……√«≈√∆…¡û§¢†°…•π∆Œœ√””‹«”“ª’–……ÊÊÊÊÕœ ÷”€€€––––––€€€€—”““””””—Á¬‹ƒ≈ƒ††°••ü††§ß°††£§¢¢£££¬“”””““—€œœœ€—¡ ŒŒŒÕÕÕ∆Ωœ‹ÊœŒŒŒÕÕ∆¬–«»«À …ÃÀÀÀ…øüÛ°üü∆Û∫¿Œœ√””Ê ””ª‘‘——–œŒ  ŒÀ÷“—€€–––––––€“€—”—“””””–∏Ωø¡‹¬†††••ü††£ß°††£§¢¢§££»””””””““———€Ã¡ÊÕÕÕÃÃÃƒªŒ¬…ÕŒŒÕÃÕ∆¡–≈…≈Ã»ÀÃÀ  Êøü•¢üü…À…ÀŒœ√”—«»‘‘π”’’’’’’–ÕÃÃ’”““——€€––––€“€—”—““”””Œ∫Ωø¡‹¬†††§•ü††£ß††°¢§¢¢§¢¢Œ‘‘‘””‘ÃŒÃ€“€€¡…  Ê…ÊÊ‹∑Œæ«ÕÃÃÃÀÀ∆¿–ƒ»« √ÃÃÀÀ…À¬§Û≠üüÀÀÃÕŒœ«”—»…“”π“‘’’‘’’Œ  Ê’’‘‘‘‘‘‘””””“”“”‘“”””””ÃΩ¬√ƒ≈ƒ†††••üü†£¶††°°§°°•¢†“–€€À€—´≥™√œ»œΩÊ»»≈ƒ‹øª£Ãª‹Ê«»»…Ê∆ø–√……«≈ ÀÀÊÊ Êƒ≈«≈∆ÕŒŒœœ––€€–€–”π€“““““”Õ…… ’‘’’‘‘‘‘‘’’‘‘’’’’’’’’’’Ê∫Ωø¡‹¬†††••ü††§ß††¢°§°°•¢üÀ´∞≥∑Ω¥™≠£≠≥±¥µΩ∫ÁÁÁÁÁÁÁÁÁæ»√∆≈∆∆»ºÃ¡«»øÊ…Ê…ŒŒŒŒŒŒŒŒŒŒœœœœ––€€€“”’∑––€––€€–œŒŒ””‘‘‘‘’‘’’‘‘’’’’’’’÷÷’÷«ºΩæ¿‹¡††°••ü††§ßü†¢°§¢†•¢ü…Áª∑µ≥±Ø≈∏±Ø±ªƒø•ÁÁÁÁÁÁÁÁÁÁÁÁÁÁΩÁºπ¬ª≤ª»∆»……––ÕŒŒŒŒœœœ––€€€—œ–””‘’∏œ€—€––––––––––—““”‘‘‘’’’’’’’’’’’÷÷‹º¿‹ƒ≈√†††••ü††§¶ü†¢†§¢†•††√ΩÁÁªªπ∏«æÁπÁƒÊ¡™ÁÁÁÁÁÁÁÁÁÁÁÁÁÁÁÁÁÁÁÁÁÁÁÁ¿À —Ãºøºæ¿√∆…Ê À€””ÕÀ‘‘‘’πÕ—“——€€€€€€–––œœŒÕÀÕ‘‘‘‘’’’’’’’’’÷ø∫ºæ¿¬¡†††••ü††§ßü†¢†§°†§°†ÁÁÁÁÁÁÁÁÁÁÁ∏Á√…Á•ÁÁÁ¢¢£ÁÁÁÁÁÁÁÁÁÁÁÁÁÁÁÁÁÁÁÃŒ”Œ£§¶ß®Û¨Ø±¥∑–‘’–€”—“’∏À–€€———————————€€€œŒ‘”‘‘‘‘‘’’’’’’÷ºΩææ¿¬¡†††•§†††§ßü†¢†§¢†§°†ÁÁÁÁÁÁÁÁÁÁ∫∂µ‹ƒ¥ÁÁÁÁü††üü††ÁÁÁÁÁÁÁÁÁÁÁÁÁÁÁ—“””°•¶ßßÛ™´Æ∞≠Ã‘’——Œ¡À’πæ¿‹≈»Ê ÃŒœ––”“““€—€—”‘‘‘‘‘‘‘‘’’’’÷∑Áæ¿‹≈√††°¶•ü†°§¶üü£°£¢†§††ÁÁÁÁÁÁÁÁÁÁÁÁÁÁÁÁÁÁÁÁ†ü†üü††††ü†ü††††††ÁÁÁÁ—“”€°•ß®Û≠≠Ø≤±≥¡——–”œÕÕ“πºººΩΩΩΩΩø¿¬¬’””€… €“œ–œŒ–––€—““”‘÷µªºæø¡¿†††¶§††°§¶ü†£°¢¢†§°üÁÁÁüü†üÁÁÁÁÁÁÁÁÁÁÁÁÁüü††††ü†ü††††ü†††††ÁÁÁÀÃŒæ´¨ÆØ∞≥≤µØ§•≠µ¿Õ€œ“”∆∫ø¬¡¡¡¡¡¡¬¿¡ø”‘‘À¿¡–“Õ—»«…Ê ÀÃÕŒœ–“∏ΩΩæ¿¡¿††°¶§††°§¶††§°¢¢°£°üÁÁÁ††ü†ÁÁÁÁÁÁÁÁÁÁÁÁü†††††††††ü†††††††††ÁÁÁ•™≠Û´´´¨Ø±∞´ß∞≠¶£°§¡«Õ”Ã∫√…««∆∆≈≈ƒ√ƒ√ €—øæÁ“€€—Ãø¿¬√√≈∆»…ÊÀÕÕÕÃ …∆††°¶§††°§¶††§¢¢¢¢£°üÁÁÁ†††††††††††††††††††††°††††††††††††††ÁÁÁ†¢°°§¢£§•®°¶≥Ø¶§Û©¢™¥Æ“≈º¡ÊÊÊÊ»…»√∆ƒ‹¡¿øºª∑”“““€∑ÁÁÁÁºæø¿¬¬√ƒ«… ÕÕ††°¶£††°•¶††§¢¢¢££°üÁÁÁ†††††††††††üü†††††††††††††††††††††††ÁÁÁ††††°††°£ü®≥©ü¢¢†††ü§©ÆÁªΩ¿æºªπÁº∏¡¿¡¿æº∫∫¥ ”“”≈ØÁÁÁÁÁÁÁÁÁÁÁπΩΩø‹¬†°°¶§††°•¶††££¢¢£¢°†ÁÁÁ††††††ü†††††††††††††††††††††††††††††ÁÁÁ†°££°°†††Û≤§†≤¥¥≥±ÆÛ¶§£®Á∏πµµ≥¥¥µ∂π∏ππ∑∫π∫Á¬œ–—ÆÁÁÁÁÁÁÁÁÁÁÁÁÁÁ¥∏∫π°†¢ß§††°•¶††§§¢¢§¢°†ÁÁÁ††††††††††††††††††††††††††††††††††††ÁÁÁ†§©ÆØ∞≠ß≠±°°µ∏∑∑∏∂∑∑∂∂¥ØÁ≠´©≠¨™≠™¨ØØÆØÁÁÁÁÁÁÁÁ¥ÁÁÁÁÁÁÁÁÁÁÁÁÁÁÁ¨≠Ø´††¢®§††¢•¶††£•£¢§¢°†ÁÁÁ††††††††††††††††††††††††††††††††††††ÁÁÁ†††¢´≠≠ØØ†£∂∏∏πππ∑∏π∏∏∑±∏£¢°££°¢¢¢¢°ÁÁÁÁÁÁÁÁÁÁÁÁÁÁÁÁÛ•§ß¶ÁÁÁÁÁ¶§®¶°°¢©§††¢•¶††£¶£¢¶¢¢†ÁÁÁ††††††††††††††††††††††††††††††††††††ÁÁÁ¨•£††††††¶∂∑ππº∫∫ªΩæÁæΩ∂¥†††††††††††ÁÁÁÁÁÁÁÁÁÁÁÁÁÁÁ°°°†£¢££°§°¢ß•§°°£Û§††¢¶ß†°£ß£¢¶¢¢†ÁÁÁ††††††††††††††††††††††††††††††††††††ÁÁÁ≤µ∂¥≤Æß§Û∑∑∏∫π∑≥¥∏‹¡ææ≈¡¢†††††††††††ÁÁÁÁÁ††ÁÁÁÁÁÁÁ†††††°†°°†°¢¶•¶®°°£™•††£¶¶†°¢ß§¢ß°¢†ÁÁÁ††††††††††††††††††††††††††††††††††††ÁÁÁ≥µ∑∑∑∑∑∂∑∏∏πª±≥ÆÆ∑√æπÁæ©††††††††††††ÁÁÁ†††††††††††††††††††††††°°†£°°§™•††£¶¶°°¢ß§°®°°†ÁÁÁ††††††††††††††††††††††††††††††††††††ÁÁÁ††ß∫∏∑∑∑∏∏∏∏¥Ø±¨∞∂æü††††††††§†††††††ÁÁÁ†††††††††††††††††††††††°††°°°•´•†°£¶¶°¢¢®§°®°°†ÁÁÁ††††††††††††††††††††††††††††††††††††ÁÁÁ††ü∑¥ª∂∏∑∏∑±≤ÆØ¨µ∞•††¢»∆æ≤†§…ü††††††ÁÁÁ††††††††††††††††††††††††††°°¢•¨•††§ß¶°¢°©§°®°°†ÁÁÁ††††††††††††††††††††††††††††††††††††ÁÁÁ†††¶∂∑≥∑∂∂≤∞Æ≠¨¨π¥û††™œÕÊ»©°»±°†††††ÁÁÁ†††††††††††††††††††††††††°°°¢¶≠¶°†£ß¶°¢°ß§†ß°††ÁÁÁ††††††††††††††††††††††††††††††††††††ÁÁÁ†††ü≤≤≠πø∫∂∫≠¨™Ø≈∑†††≠ŒÕ …‹ü∫»ü†††††ÁÁÁ††††††††††††††††††††††††††°°°¶≠¶††§®•°¢°ß§°ß°††ÁÁÁ††††††††††††††††††††††††††††††††††††ÁÁÁ††††§µØøΩΩΩÁ≤´©≤À°°††≤ÕÃÀÊ †•»≠°††††ÁÁÁ††††††††††††††††††††††††††°°¢¶≠¶°†§®•°£¢ß§°ß°††ÁÁÁ††††††††††††††††††††††††††††††††††††ÁÁÁ††††•ΩΩÁΩΩΩºªØ´æ√ü†©¢µÕÀ  Ê∑üƒ»ü††††ÁÁÁ††††††††††††††††††††††††††°¢¢ß≠¶°°§©§°£¢®§°®¢††ÁÁÁ††††††††††††††††††††††††††††††††°†††ÁÁÁ††††¨√ªÁÁºººÁÁ∑…¢†¢≤°∏ÃÃ ÊÊÊû∞Ê§††††ÁÁÁ††††††††††††††††††††††††††°¢¢ß≠¶°°§©§°£¢ß§¢ß¢††ÁÁÁ††††††††††††††††††††††††††††††††††††ÁÁÁ††††≠π≥≤Æ≠´≠ØØ∞™ü™º™™¿ÀÃÀÊÊÀß£…¿††††ÁÁÁ††††††††††††††††††††††††††°¢¢¶≠¶°°•©£°§¢ß§£ß¢††ÁÁÁ††††††††††††††††††††††††††††††††††††ÁÁÁ††††¶ªªÁºººººººü†π∑≠¶≈ÀÀÀÊÊÊ¡ü√ ü†††ÁÁÁ†††††††††††††††††††††°††††°¢¢ß¨¶°°•©£°§£¶§§ß£††ÁÁÁ††††††††††††††††††††††††††††††††††††ÁÁÁ†††††††§¨≥µπ∫ª¢††•Û††…  ÊÀ……ÃûÆÊ¶°††ÁÁÁ††††††††††††††††††††††††††°¢¢ß¨¶°°¶Û£°•§¶••ß£††ÁÁÁ†††††††††††††††††††††††°††††††††††††ÁÁÁ†††††††††††††††††††††©≤∑ªΩø√»ü§√≤°††ÁÁÁ†††††††††††††††††††††††††°°¢¢¶≠¶°°¶©£°••¶•¶ß§††ÁÁÁ¢††††††††††††††††°††††††††††††††††††ÁÁÁ††††°†¶†††††††††††††††††††††††††††††ÁÁÁ††††††††††††††††††††††††††°¢¢¶≠¶°°¶™£°¶¶¶•ßß§††ÁÁÁ††††††°††††°††††††††°†††††††††††††††ÁÁÁ††¢†††≠¢††††††°††††††††††°††††††††††ÁÁÁ†††††°††††††††††††††††††††°¢¢ß≠ß°¢ß´¢¢¶¶ß•ßß•°°ÁÁÁ††††††††††††††††††††††††††††††°†††††ÁÁÁ††∞†††§£ü††††††††£†©††††°†††°††§°£††ÁÁÁ††††††††††††††††°°††††††††°¢¢ß≠¶¢¢ß™¢¢ßßß•©¶••¢ÁÁÁ†°£†°°††††°†††††††††††††††††††††††††ÁÁÁ††´¢°††°†††°†††°†®ü∫¢†††††††††°∞¢…ü†ÁÁÁ†††††°†°†°†††°†††††††††††°°¢¢ßÆ¶¢¢®¨£¢®©ß¶Û¶¶°°ÁÁÁ°†°¢°†°°°†††††††††††°†°†††°°†°†††°°°ÁÁÁ††™´†°°†°†††®©†°°¢≤¥ª£†††°°†°†®≠¢ƒ¢°ÁÁÁ†††°†††°††††°†°†°°††°†°††°°¢£ßÆß¢¢®´¢¢®Ûß¶Û¶•¶£ÁÁÁ§††°†°†††††°†††††††††°†°†††°††††°†°†ÁÁÁ°†¨Ê∑®†°°†ÛÁ†°µØ†°†∫∑°°†®©Á≠Û††††°°üÁÁÁ††††††°†°°††°†††††††††°†°†°¢£ßÆ¶¢¢©¨¢¢©©ß¶™¶Û†ßÁÁÁ°°†††††††°†††††††°†°†°††††°†††°†°°°°ÁÁÁ°†∞ÕÀ…∆ª´¥Û•†£¶¶æ†°†¥°†≥∞†††¥¥†††§∂°ÁÁÁ††††††††††°†††††††††††††°£°£¢®Æß¢¢©´£¢©™ß¶™•±Û•ÁÁÁ¢¢°††°††°††††°†††††††††°††°††°†°†°††ÁÁÁ°†±ÕÕÃÀÀŒƒ§πºº∫´∂Ûß¢°£µÛ°¶ßØ•≥ØÛ¡«Ã£ÁÁÁ°††°†††°°°†††††††°††††††°†°££ßÆß¢¢®¨¢¢©Ûßß±¶æ•§ÁÁÁ††††°††††††††††††°††††°†°†°†††°†°†††ÁÁÁ°£∂ŒÕÃÃÃ’±Á¡øÁ¬Ω¨—‹ΩªºÀ®≥æ¿¿º≠œ» ÀÃ•ÁÁÁ°°°††††°††°°°°°°†††°°†††°†°££ÛÆ®¢¢©¨¢£©©´ÆØ∞∏∞§ÁÁÁ†°††††°°†††††††††°†††°††††††††°†††††ÁÁÁ†πƒÃ“€ŒÕ“π¿√®©∫¡π€»ÃÃÕ√∑¿¬´¡√æ∏œÃÃÕ†ÁÁÁ°†††°°†°°†††††††°††°††††°†°££ßØß¢¢©´¢£©ØµÆ∞√∑ÁÁÁÁÁ°†††††††°††††††††††††°†††§†††††°†††°ÁÁÁß¥√ —‘”“–æ√¿∫∏ª»æÀÕŒÕ—¡æ∆Û§∑ƒ¡ª“Õ–©°ÁÁÁ†°††††°†††††††††£†°°°†††°†°££®Æß¢¢ÛÛßØ∑Æ≥≤Œ∞°ÁÁÁÁÁ†°††††°††°††¢†°†°††††††°°††°†††°†°†°ÁÁÁ¨‹º  —‘’€¡ƒ∆ƒƒ√Ê¿Œ“”—‘√¡»¡¿¿‹√Ω‘—∆ü°ÁÁÁ†††††††††°††††°†°†††°°°†††°££®Æ¶¢£¨¥¨≥≥±π€æ•ÁÁÁÁÁÁ††††††°†††††††††††††††††°†††††††††¢°ÁÁÁÁª¿«À€“”‘‹√Õ  Ã«¬”’’’÷…‹ »»∆Ê√¿÷—Ω•†ÁÁÁ°°†††††°††††°†°¢°°†°°††£†°§§§®ØÛµ∏∑Ø¨≤µ¬”¬©ÁÁÁÁÁ£††††¢††††††°††††††††††††¢†††°†°††††°†ÁÁÁÁÁÁÁ≈Õ““‘∆‹ÃŒœœ‹≈÷’’’÷œƒ»ÕÃÀŒ‹∆”“Ê¨†ÁÁÁ†††°††††††††††††††††††††¢°°Û≠π∏®≠∞≤∞¥Ω–Õ±ÁÁÁÁÁÁÁ††°§°°£†††††††††††††††††††°†††††††††°†ÁÁÁÁÁÁÁ∂‹Ê…À€∆≈…Ê∆≈–“——“”‘«≈Õ–œ∆ƒœ€ŒÀØûÁÁÁ†††††°†°†£ü†††°†††††°°°††°†Ø≥¥∞´Ø¥∏øœ—ºÆÁÁÁÁÁÁÁ¢††††††°°††°†††††††††††††°†††††††††°°†°£ÁÁÁÁÁÁÁÁÁÁÁÁ–…∆«…œ“«…… Œ“–»«««∆Õ ƒ≈√ÆÁÁÁÁ††††¢†††††°°††¢††§†°†°†††°¢≠Ø±≥∏æ∆€œ≈∏ÁÁÁÁÁÁÁÁü¢Æ††¢£†°††††††††°†††¢††††††††††††°£°†††¢´¢†ÁÁÁÁÁÁÁÁÁ∆∆Õ Õ»¡ªµ¢§º∆Õ€ÕÀÀŒ–∫•ÁÁÁÁÁÁÁ†††††††††°††††°†††¢†††°†°££∂ªæƒÕ“€¬∑ÁÁÁÁÁÁÁÁ°°†††††††††°§ü††°†††††††°†††¢†††¢†††°°†•§Û¢†ß†ÁÁÁÁÁÁÁÁÁÁÁÁÁÁÁÁÁÁÁÁÁÁÁÁÁÁÁßÁÁÁÁÁÁÁÁÁÁ††¢††††††††††°††°¢†ßü°††††ü…œ—œƒµ∂ÛÁÁÁÁÁÁÁÁ¢°°°††¢†°†††°†¢°†°†¢†¢††††††††††††††††£†°†°¢†°°•†°°ÁÁÁÁÁÁÁÁÁÁÁÁÁÁÁÁÁÁÁÁÁÁÁÁÁÁÁÁÁÁÁÁÁ††††††††°°†††††††††††††°ß£°†À…∫ØÁÁÁÁÁÁÁÁÁÁ†ß°†°††°†°††°°†°¢†°†††°°°††††°†††††††£††††††††°††°††¢ÁÁÁÁÁÁÁÁÁÁÁÁÁÁÁÁÁÁÁÁÁÁÁÁÁÁÁÁÁÁ††¢£°°°††°†¢°†††°°†°†§††††£°°£°ÛÛÆÁÁÁÁÁÁÁÁÁ†°£°°§ß¢£°†§††™†•†††††††°††¢£°£†††°†°††††°†††††††°°††°¢††°¢¶©†¶≥üÛ§ÁÁÁÁ•†°°ÁÁÁÁÁÁÁ††††£†£†††°•†°††°††°††°††††¢†°¢£°°´≥°ÁÁÁÁÁÁÁÁ†°°¶†§†°††°©ü¢†¢†°†°††††††°†††††¶††††††°†°°§†††°°††††¢†††°†£†°†°†§§†°°®¶†§¢¢†††°°†††††††††††††††°††°†¶††††°°°†††°°ß†°§®§ÁÁÁÁ¢§°¢¢°°††¢†°°†°†¢°†§††£ß£†°£††°†††°°††°†††°††°°†††°†°†°††°††°†°°†††®°†°°°°††£††°†††††††††††††°†††°†††††††††††††¢††††††°°£™ÆÁÁÁÁ†±ü°¢†°†°†°ü¢††¢††††¢ß††¢†††°††°††°°†°††°†††††°†ß††§††°†††††°††††††°°°£°†††°††††††††††††††††°†††††¢§††††††††††°†††††°††††°°ÛÁÁÁÁü°¢†°°°°††°£¢°°°£††††¢††°†¢°†°†††°°††††††††††•††††°†††£††§††°†††††††††°°£††°††††¢††°†††††††††°†††††††††°††††††††††¢††††°°°®¢ÁÁÁÁ°§°®†††££†¢°°†£°†°°††°°†††°†††††°°£††††§°†††††°†°°£††°°††°†††¶•ü†°°†°†††°†††††††††††°†£°†††††††††°°†††††††††††††††°†††°††°§°°¨§•†°†°¶†¨†°°†††††°§†°†°††††††°¢†††††§†£°†°°††††°°†††††©ü†††††°†°††°°°°°††°†††††††††°†††††††††††††††††††††††††††°£°†††°°††††°ß°†§´ü††°†°†°°††°†£††°°†††°†††††°†°††††•†††¶†°°°°††††††¢†°§†°°††™ü†††††††°†°†††°††††°†††††††††°††††††††††††°††††††°†††††¢††††††¢¨¢¶§¨•°££°§©¢†¢§†††£††®††††£††††††¥†††¶††††°°††††°†°°††£††††ß°†¢†°°††††°†††¢††°°††††††††††††††°†°†°†††††††††°†††††°†®ü†††®¢††°£°°¢§°§∞Æ†§§¶°¢°†°°¢†°Û†¢††††°°††††§°†°††††°††°††°°°¢†§††¢¢†††††°°°†¢††°°†††°†°°††††††††††°†††††¢††¢™†°†††††¢††††¢†°††††°†††§††¢£¢£§°£††ß¨ß≠™°°££†¶ü°†°††°¶£°°††††††††††††††††††††°†£†©†††°†°†††††††††††¢†£§†°†††°°°°°†°††††°†°†¢†††††°†††°††††††††°†††°†°††††¶£°°¢¢†¢Û†°¢±†°°©§ß¶•†•∞ü°§ü†††¢†††°†††¢®ü††§†††††¢°†•ü†††°†°††††††°†††°†††°£°††††°††††††°†††††°°†††††¢††°†††°††††††††††¢††°°°°†°††¶°¢†°°°£•°£°†¢°¢°†¢©ü§§¢°††††††††¢††††£†§§†°°°†£°°†°†††°†††††††°†¢°†´ü•†††°†††††°††††††£††††•†††°†††††††††§†††††°°††°††††°°¢£††°°°•†°¢†¢°°†°†¶¢©ü†°¢¢¶†•†¢Æû©£†††¢¢†††°†¶†°†°§¢°†£†°††°†††°††°°¶£§ß°††•†††¢¶††††††¢°††°†™£†††††°†††††††††††††††††††°††°†°†††°ß®°†°°††£†°¶§††©†°¢†¢°†††°°†ß¶§¶†°††††††°†°†¢†††©£•†††††°††††°°°†††††††°†°°°††††††††††¢†††††¢¢†°†††°††††††°†††¢††††††††°†¢†Û£°†°°††§¢£††¢°•§¢††¶£•¢¢†°°£¢°°°£°†°††§°°°•†´§¶††††°¢ü≠¢††°†††¢††††¢°††††°††°†¢´††††††††††††††††††††††††††††††††¢†¢°††°†††††††°¢•†¢¢¶†¢£°®††††††°°†Æ©≤£††°†®®§¢®††•§††§††¢≠•Û°††°††°††††°†††§¢¶†°††°§†††††°°††††††††††††††††††§ü††††††††°°†††°†††††°†††°†£°†††§ü®†££≥ü¢¢¨ß°°°°£¢Æ††®™©©†°°†°•££¶°°†††°†Æü°°†¢†††´¶††°†††°°†††¢§°†°†°¢††°†°†°°††††††††††°††††††††††°††††††¢°†††††°††††°††††°†¢††°Æ†ß££°†¢•¶•´¢¢£¢£††§≠¢°°®§††¢¢¢Û†°††§••†††††£°†£†¢†£†††°¢°†ß††°¢††††¶°†°††°§ü†††°††††††††††††††¢††††††††††††††††††††°°°¢††£¶™£°†•°†††††°°¢®∞ü¢§°¢£°£†¢†ß¨£††°°†¢†††¢¢ü§††††£°°°¢††£¢†††¨°¢††††††††††°ß≠¶†††††††††°††¢£§†††††††††††°†°††¢††°†††††††°††††®°†£°†•≠¶†¢†°†¢†°††°•¢¶¨¢¶™•††¢°°£†°††††††††°°††°††††§†††°°°††°†¥ü††¢††°††††°†¶°°†††®°ß††°†††††°†††††††††††††††°¢†£°††††°†††††°††£†°†°†°°°™†°††††°¢®ß®†°†°£∑£†°°¢§£§°°††°°†††††°††††°¢°††°†††°•£ß†°†ß†††°†¢†§††°°††††£°®©††††††††††¢†°††††††ü©†††††°†††††††£††††††††°°†•®¶°††°††°•¢´Ø°°†°°†£¨††∞†ü´•††°††°††††††°†††††§•ü††††††¢¢††††††††††°°°°††††††††¢£°¢††††††°†††††††††°†††£°†††††††††††††††††††°°††¨¢†¢††±††™££±†ß§Æ™Û•¨•£°°°°°††¢¢†¢ß†£††°†††††°††††††††£©¢††††††††°†°†††§¢®†††††¢††††††††°§††††°£°°††††°†††††††°†††§ü††°††°¶ü†°†••ß§¢∞®£°°††¢∞´ß¢Û£©¶¶Æ§°£°¢£†°†°†¶™¢¢°¢°†£°††††††††°††¶†††°†††£°†¢§ü††††††††°°†§°£†††††°°††††††§•†£††††††††°†°†††°°ü†††°†§ßü°†††¶ßßü†°•ü°†°°••≠°°•¢°¢°¢§£´§¶¢°†§†£°†††Æ¨¢®¢††††††††§†††††††°°†††°†°†††††£†°†††¢®ü†§†††††††¢†°†††¢üØü¢†††††††ü™ü†††°¢¢†°≠¶•¢ü¢†°††°£†††••°¢•Û•°¨•†£§°†••£°Æ•¶°¢††°¢¢°†§£™≠®¢††††††£¢ß¢°©†††°Æ°°°†°°†¢††††††§†††°†††•¢°†††††††††††®•´°††††††°¢ü†††††°´°†£¶°††††††§°¢°†††••¢£ß£ß°¢†§¶¢°°°°°†††°†§†°¢†£Û†††•§§††°°†°£°†††††¢ü¨†°°†¢††§£¢††††††††°†°†††°¢†††°¢°•ü††°¢††††††††††°°¢†£°£†°†††°®¢††°††††††°ß†••¢¶§¢†°¢©†°¢°•†©≠¢°°°£•≠≠£•§•ß£§††¢†§†°°††¢°¢†°†°°†§††††††††ß£¶†††£††°¶†††††¶£†††††††††††Æû†°®®†°†£†††††•¶•††††††§¢††††††¢§ü°¶£®¶•™¨Æ•£ßß†•£ß©®©ÆØ∞£¶≤®ÆÛ®¢¶†††¢°†£®†°°††£•°£¢¢°††°†††°†††††††††††††°§ü†††°††°£†††††•ü†°†Æü†°†††††§£††°†°†††††††°ß™ü†††††††††††††≠Ø¥∫∏∂ª∂¥∑±ªµªØ±ø≤µªπÆÆΩ∏ÆØÆÆØ¥∑±Á¥ØÆ∞ÆÆµª∂±¥∑¥ÆÆ∞Æ∞ÆÆ∞ÆÆÆÆÆØÆÆÆÆÆÆÆÆÆÆÆØÆØÆÆÆÆÆÆØØØÆÆ±∞Ø±ØÆÆÆÆ≤ÆÆ∞ÆÆØÆØÆÆÆØØ∞Æ∞ÆÆØ≥ÆÆ∞ÆÆ∞ÆØÆÆØØØ∞˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛
+endstream
+endobj
+24 0 obj
+<<
+/Type /XObject
+/Subtype /Image
+/Width 124
+/Height 120
+/BitsPerComponent 8
+/ColorSpace 28 0 R
+/Length 14881
+>>
+stream
+						
+																																																																				
+																																																																									
+		
+												
+
+
+
+
+																																																																																									
+																																																																																															
+																																																																																																																			$																																																																																																																																																				
+
+																																							
+
+																																																																																																																										
+																								
+	
+																																																							
+	
+
+	
+													
+	
+															
+
+
+																																																						
+																																																																																																	
+	
+	
+																						
+
+	
+
+																																																	
+	
+	
+																																							
+																																																
+
+
+	
+																																																																										
+
+																									!																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																						"																
+																				
+															&															
+
+																						
+
+																																																																																																			
+																							
+	
+																											 																																																	 																																																																																																																		
+	
+																																																									"																																				 																																																										(																																																					
+																																																																																																																																																																																												
+																																																									
+	
+																																																																																																																															
+					
+
+
+																																																																 	"																																								
+																																																																																															
+																																																																																																																																																																																											
+																																		(																																																																																																																															!																											!(																																								'																																										!'																																												!																						!																																								!																																										!																																									!																																																																					!																																														!!																																						
+!																														
+		"!"																																							!																																																				!																																				!				
+	
+																																																																																																																																																																						
+	
+																																																																																																																					
+
+	
+	
+																														
+
+																																																																																																																																																																																																																																																																																																																																																																																																																																																																									
+endstream
+endobj
+25 0 obj
+<<
+/Type /XObject
+/Subtype /Image
+/Width 119
+/Height 120
+/BitsPerComponent 8
+/ColorSpace 29 0 R
+/Length 14281
+>>
+stream
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+!
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+%#%
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+%#%%%!
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+%#%%%
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+!#%
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+% 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+%
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#%#%
+#
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+$% 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+$%#% !
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+!
+#%#%%
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+% %$%$
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+$#%# 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+! %
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                                                                                       
+endstream
+endobj
+26 0 obj
+<<
+/Type /XObject
+/Subtype /Image
+/Width 118
+/Height 114
+/BitsPerComponent 8
+/ColorSpace 30 0 R
+/Length 13453
+>>
+stream
+																																																												
+																																		
+																																			
+											
+
+
+
+	
+																																							
+																																																
+																																																																																									
+
+																																																																																																																																																																																
+																																																																																																																																																																								
+																																																																																						
+																																																																																					
+												
+																																																																										
+																																																																																																
+	
+																																																																						
+	
+																																																																																						
+																																																																																																																																																																																																																																																																																															
+		
+																																																																																																																																																																																																																																																																																																																																																																																																																													
+																																																																																																														 																																												$															
+
+																			
+
+																																																																																										
+																																														 																																														
+																																																																																																					
+				
+																										
+																												"																																				 																																																"																																													
+		
+	
+
+
+														
+																																																																	
+												
+ 																																																																									
+												
+																																					
+								"																
+																																																																																
+
+																																																																																																																																																																
+																																											
+																																																																																																																		
+																																																																																																																																																																	
+																																									
+																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																														
+																																																																																																																																																																																
+																																																																																																																																																		
+																																																																																																																																																																																																																																																							
+																																																																																						
+endstream
+endobj
+27 0 obj
+<<
+/Type /XObject
+/Subtype /Image
+/Width 123
+/Height 113
+/BitsPerComponent 8
+/ColorSpace 31 0 R
+/Length 13900
+>>
+stream
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+!
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+"!
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+!
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+!
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+!
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+endstream
+endobj
+7 0 obj
+<<
+/Type /ExtGState
+/SA false
+/SM 0.02
+/OP false
+/op false
+/OPM 1
+/BG2 /Default
+/UCR2 /Default
+/HT /Default
+/TR2 /Default
+>>
+endobj
+39 0 obj
+<<
+/Type /FontDescriptor
+/Ascent 750
+/CapHeight 676
+/Descent -250
+/Flags 262178
+/FontBBox [-168 -218 1000 935]
+/FontName /Times-Bold
+/ItalicAngle 0
+/StemV 133
+/XHeight 461
+/StemH 139
+>>
+endobj
+40 0 obj
+<<
+/Type /FontDescriptor
+/Ascent 750
+/CapHeight 662
+/Descent -250
+/Flags 34
+/FontBBox [-168 -218 1000 898]
+/FontName /Times-Roman
+/ItalicAngle 0
+/StemV 84
+/XHeight 450
+/StemH 84
+>>
+endobj
+41 0 obj
+<<
+/Type /FontDescriptor
+/Ascent 750
+/CapHeight 653
+/Descent -250
+/Flags 98
+/FontBBox [-169 -217 1010 883]
+/FontName /Times-Italic
+/ItalicAngle -15
+/StemV 76
+/XHeight 441
+/StemH 76
+>>
+endobj
+42 0 obj
+<<
+/Type /FontDescriptor
+/Ascent 750
+/CapHeight 662
+/Descent -250
+/Flags 34
+/FontBBox [-168 -218 1000 898]
+/FontName /Times-Roman
+/ItalicAngle 0
+/StemV 84
+/XHeight 450
+/StemH 84
+>>
+endobj
+43 0 obj
+<<
+/Type /FontDescriptor
+/Ascent 753
+/CapHeight 562
+/Descent -246
+/Flags 35
+/FontBBox [-28 -250 628 805]
+/FontName /Courier
+/ItalicAngle 0
+/StemV 51
+/XHeight 426
+/StemH 51
+>>
+endobj
+44 0 obj
+<<
+/Type /FontDescriptor
+/Ascent 822
+/CapHeight 692
+/Descent -277
+/Flags 34
+/FontBBox [-166 -283 1021 927]
+/FontName /Palatino-Roman
+/ItalicAngle 0
+/StemV 84
+/XHeight 469
+/StemH 84
+>>
+endobj
+4 0 obj
+<<
+/Type /Font
+/Subtype /TrueType
+/FirstChar 32
+/LastChar 121
+/Widths [250 0 0 0 0 0 0 0 0 0 0 0 250 333 250 0 
+0 500 500 500 500 500 500 500 500 0 333 0 0 0 0 0 
+0 722 0 722 722 667 611 778 778 389 0 778 667 944 722 778 
+611 0 722 556 667 722 722 1000 0 722 0 0 0 0 0 0 
+0 500 556 444 556 444 333 500 556 278 0 556 278 833 556 500 
+556 0 444 389 333 556 500 722 0 500 ]
+/Encoding /WinAnsiEncoding
+/BaseFont /Times-Bold
+/FontDescriptor 39 0 R
+>>
+endobj
+5 0 obj
+<<
+/Type /Font
+/Subtype /TrueType
+/FirstChar 32
+/LastChar 148
+/Widths [250 0 0 0 0 0 778 0 333 333 0 0 250 333 250 278 
+500 500 500 500 500 500 500 500 500 500 278 278 0 0 0 444 
+921 722 667 667 722 611 556 722 722 333 389 722 611 889 722 722 
+556 0 667 556 611 722 722 944 0 722 611 333 0 333 0 0 
+0 444 500 444 500 444 333 500 500 278 278 500 278 778 500 500 
+500 500 333 389 278 500 500 722 500 500 444 480 200 480 0 0 
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
+0 333 333 444 444 ]
+/Encoding /WinAnsiEncoding
+/BaseFont /Times-Roman
+/FontDescriptor 40 0 R
+>>
+endobj
+6 0 obj
+<<
+/Type /Font
+/Subtype /TrueType
+/FirstChar 32
+/LastChar 121
+/Widths [250 0 0 0 0 0 0 0 0 0 0 0 0 333 0 0 
+0 0 500 500 0 0 0 500 500 500 333 0 0 0 0 0 
+0 611 611 667 0 0 611 722 0 333 444 0 0 0 0 0 
+611 0 611 500 556 0 611 833 0 0 0 0 0 0 0 0 
+0 500 500 444 500 444 278 500 500 278 0 444 278 722 500 500 
+500 0 389 389 278 500 444 667 444 444 ]
+/Encoding /WinAnsiEncoding
+/BaseFont /Times-Italic
+/FontDescriptor 41 0 R
+>>
+endobj
+12 0 obj
+<<
+/Type /Font
+/Subtype /TrueType
+/FirstChar 222
+/LastChar 222
+/Widths [556 ]
+/Encoding /MacRomanEncoding
+/BaseFont /Times-Roman
+/FontDescriptor 42 0 R
+>>
+endobj
+13 0 obj
+<<
+/Type /Font
+/Subtype /TrueType
+/FirstChar 47
+/LastChar 121
+/Widths [600 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
+0 0 600 0 0 0 0 0 0 0 600 0 0 600 0 0 
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
+0 0 600 0 600 600 600 0 0 600 600 0 600 600 0 600 
+600 0 0 600 0 600 0 0 600 0 600 ]
+/Encoding /WinAnsiEncoding
+/BaseFont /Courier
+/FontDescriptor 43 0 R
+>>
+endobj
+23 0 obj
+<<
+/Type /Font
+/Subtype /TrueType
+/FirstChar 48
+/LastChar 120
+/Widths [500 500 500 500 500 500 500 500 500 500 0 0 0 0 0 0 
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
+0 0 553 0 0 0 0 0 0 0 0 0 0 0 0 546 
+0 0 0 0 0 0 0 0 516 ]
+/Encoding /WinAnsiEncoding
+/BaseFont /Palatino-Roman
+/FontDescriptor 44 0 R
+>>
+endobj
+1 0 obj
+<<
+/Type /Page
+/Parent 8 0 R
+/Resources 3 0 R
+/Contents 2 0 R
+>>
+endobj
+9 0 obj
+<<
+/Type /Page
+/Parent 8 0 R
+/Resources 11 0 R
+/Contents 10 0 R
+>>
+endobj
+14 0 obj
+<<
+/Type /Page
+/Parent 8 0 R
+/Resources 16 0 R
+/Contents 15 0 R
+>>
+endobj
+20 0 obj
+<<
+/Type /Page
+/Parent 8 0 R
+/Resources 22 0 R
+/Contents 21 0 R
+>>
+endobj
+36 0 obj
+<<
+/Type /Page
+/Parent 8 0 R
+/Resources 38 0 R
+/Contents 37 0 R
+>>
+endobj
+45 0 obj
+<<
+/S /D
+>>
+endobj
+46 0 obj
+<<
+/Nums [0 45 0 R ]
+>>
+endobj
+8 0 obj
+<<
+/Type /Pages
+/Kids [1 0 R 9 0 R 14 0 R 20 0 R 36 0 R]
+/Count 5
+/MediaBox [0 0 612 792]
+>>
+endobj
+47 0 obj
+<<
+/CreationDate (D:20220904210549-05'00')
+/ModDate (D:20220904210549-05'00')
+/Producer (PSNormalizer.framework)
+>>
+endobj
+48 0 obj
+<<
+/Type /Catalog
+/Pages 8 0 R
+/PageLabels 46 0 R
+>>
+endobj
+xref
+0 49
+0000000000 65535 f 
+0000128136 00000 n 
+0000000016 00000 n 
+0000008125 00000 n 
+0000125804 00000 n 
+0000126265 00000 n 
+0000126832 00000 n 
+0000124477 00000 n 
+0000128615 00000 n 
+0000128216 00000 n 
+0000008242 00000 n 
+0000018640 00000 n 
+0000127270 00000 n 
+0000127441 00000 n 
+0000128298 00000 n 
+0000018782 00000 n 
+0000027026 00000 n 
+0000050842 00000 n 
+0000027217 00000 n 
+0000027266 00000 n 
+0000128381 00000 n 
+0000027668 00000 n 
+0000039626 00000 n 
+0000127792 00000 n 
+0000067374 00000 n 
+0000082402 00000 n 
+0000096830 00000 n 
+0000110430 00000 n 
+0000039915 00000 n 
+0000040185 00000 n 
+0000040445 00000 n 
+0000040708 00000 n 
+0000039964 00000 n 
+0000040234 00000 n 
+0000040494 00000 n 
+0000040757 00000 n 
+0000128464 00000 n 
+0000040964 00000 n 
+0000050700 00000 n 
+0000124617 00000 n 
+0000124819 00000 n 
+0000125016 00000 n 
+0000125216 00000 n 
+0000125413 00000 n 
+0000125604 00000 n 
+0000128547 00000 n 
+0000128575 00000 n 
+0000128723 00000 n 
+0000128855 00000 n 
+trailer
+<<
+/Size 49
+/Root 48 0 R
+/Info 47 0 R
+/ID [<f9566596b8ed0a6fb2b86244b44abc92><f9566596b8ed0a6fb2b86244b44abc92>]
+>>
+startxref
+128924
+%%EOF

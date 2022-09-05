@@ -40,12 +40,13 @@ navigation:
       url: 'research.html'
     - page: Publications
       url: 'publications.html'
-  - page: Other Interests
-    url: 'other_interests.html'
-  - page: Other Personal Pages
-    url: 'other_pages.html' 
   - page: Contact Info
     url: 'contact.html'
+  - page: Other Personal Pages
+    url: 'other_pages.html'
+  - page: Other Interests
+    url: 'other_interests.html'
+
 
 # Build settings
 markdown: kramdown

@@ -27,7 +27,7 @@ semester: Home Page
 
 navigation:
   - page: Home
-    url: ''
+    url: '{{site.baseurl}}'
   - title: Teaching
     subfolderitems:
     - page: Current Courses

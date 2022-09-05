@@ -2,7 +2,7 @@
 layout: default
 ---
 
-# Additional Interests
+## Additional Interests
 
 * Mandolin Videos
   * [Vivaldi Mandolin Concerto in C Major](https://youtu.be/Pej22dN0UiQ), with the Hendrix College Chamber Orchestra

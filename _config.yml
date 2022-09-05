@@ -40,6 +40,8 @@ navigation:
     url: 'other_interests.html'
   - page: Other Personal Pages
     url: 'other_pages.html' 
+  - page: Contact Info
+    url: 'contact.html'
 
 # Build settings
 markdown: kramdown

@@ -21,13 +21,3 @@ topics in Robotics, Artificial Intelligence, and Computer Science Education.
 </td>
 </tr>
 </table>
-
-## Additional Interests
-* Music
-* [Fencing](https://cafencing.squarespace.com/?fbclid=IwAR2W1-yiyoj-bEjRaJGeumUSiK6R83jP7-ajcp9QCbIlkqqLR1GtkaSIAu0)
-
-## Other Personal Pages
-* [LinkedIn](https://www.linkedin.com/in/gabriel-ferrer-8154968)
-* Blog: [Computing Intelligently](http://gjf2a.blogspot.com)
-* [Hendrix Faculty Page](https://www.hendrix.edu/mathcs/profile.aspx?id=70718)
-* [GitHub](https://github.com/gjf2a)

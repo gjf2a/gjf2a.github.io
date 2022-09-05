@@ -36,6 +36,10 @@ navigation:
       url: 'teaching_history.html'
   - page: Research
     url: 'research.html'
+  - page: Other Interests
+    url: 'other_interests.html'
+  - page: Other Personal Pages
+    url: 'other_pages.html' 
 
 # Build settings
 markdown: kramdown

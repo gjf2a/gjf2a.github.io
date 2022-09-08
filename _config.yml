@@ -44,6 +44,8 @@ navigation:
     url: 'contact.html'
   - page: Other Personal Pages
     url: 'other_pages.html'
+  - page: Useful Links
+    url: 'useful_links.html'
   - page: Other Interests
     url: 'other_interests.html'
 

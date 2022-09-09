@@ -8,6 +8,7 @@ layout: default
 * [lib.rs](https://lib.rs)
 * [crates.io](https://crates.io)
 * [Rust Edu](https://rust-edu.org)
+* [Rust Floating Point Guide](https://floating-point-gui.de/languages/rust/)
 
 ### [Flutter](https://flutter.dev/)
 * [API](https://api.flutter.dev)

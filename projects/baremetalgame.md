@@ -8,6 +8,17 @@ tags:
 - Moderate
 ---
 
+## Tags
+
+### Page
+{{ page.tags }}
+
+### Site
+
+{{ site.tags }}
+
+## Description
+
 Classic early video games such as [Space Invaders](https://en.wikipedia.org/wiki/Space_Invaders), 
 [Asteroids](https://en.wikipedia.org/wiki/Asteroids_(video_game)), and
 [Pac-man](https://en.wikipedia.org/wiki/Pac-Man) were implemented without an operating system.

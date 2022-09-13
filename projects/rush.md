@@ -3,6 +3,9 @@ layout: work
 type: Project
 num: 4
 worktitle: Unix Shell
+tags:
+- Operating Systems
+- Difficult
 ---
 
 Enhance [vssh]({{site.baseurl}}/projects/rust2.html) as follows:

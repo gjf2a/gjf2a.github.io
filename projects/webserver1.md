@@ -3,6 +3,9 @@ layout: work
 type: Project
 num: 6
 worktitle: Web Server Part 1
+tags:
+- Operating Systems
+- Moderate
 ---
 
 Write a command-line program called `webserver`. This program will listen for `http` requests

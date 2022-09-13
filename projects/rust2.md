@@ -3,6 +3,9 @@ layout: work
 type: Project
 num: 3
 worktitle: Advanced Shell Commands Using Rust
+tags:
+- Operating Systems
+- Easy
 ---
 
 Implement the following shell commands as Rust programs:

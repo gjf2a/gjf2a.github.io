@@ -3,6 +3,9 @@ layout: work
 type: Project
 num: 7
 worktitle: Web Server Part 2
+tags:
+- Operating Systems
+- Difficult
 ---
 
 In this project, you will seek to improve the performance of your 

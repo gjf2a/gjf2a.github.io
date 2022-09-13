@@ -3,6 +3,9 @@ layout: work
 type: Project
 num: 10
 worktitle: Cooperative Multitasking Kernel
+tags:
+- Operating Systems
+- Difficult
 ---
 
 ## Overview

@@ -3,6 +3,9 @@ layout: work
 type: Project
 num: 8
 worktitle: Bare Metal Game
+tags:
+- Operating Systems
+- Moderate
 ---
 
 Classic early video games such as [Space Invaders](https://en.wikipedia.org/wiki/Space_Invaders), 

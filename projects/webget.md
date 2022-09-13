@@ -3,6 +3,9 @@ layout: work
 type: Project
 num: 5
 worktitle: Webget
+tags:
+- Operating Systems
+- Moderate
 ---
 
 Write a command-line program called `webget` that downloads web pages and saves them locally. 

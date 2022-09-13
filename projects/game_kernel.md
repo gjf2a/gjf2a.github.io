@@ -3,6 +3,9 @@ layout: work
 type: Project
 num: 9
 worktitle: Game Kernel
+tags:
+- Operating Systems
+- Moderate
 ---
 
 ## Overview

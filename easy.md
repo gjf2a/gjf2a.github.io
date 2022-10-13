@@ -2,10 +2,10 @@
 layout: default
 ---
 
-# Easy Assignments 12:49 pm
+# Easy Assignments 12:53 pm
 
 <ul>
-{% for post in (site.tags["Easy"] | sort) %}
+{% for post in site.tags["Easy"] %}
 <li><a href="{{ post.url }}">{{ post.title }}</a></li>
 {% endfor %}
 </ul>

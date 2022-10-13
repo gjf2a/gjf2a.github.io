@@ -19,6 +19,15 @@ layout: default
 
 ## Tags
 
+{% for tag in site.tags %}
+### {{ tag | first }},
+  <ul>
+  {% for post in {{ tag | last }} %}
+  <li> {{ post }}
+  {% endfor %}
+  </ul>
+{% endfor %}
+
 ### Site
 {{ site.tags }}
 

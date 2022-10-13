@@ -21,7 +21,7 @@ layout: default
 
 {% for tag in site.tags %}
 ## {{ tag | first }}
-{{ tag | last }}
+<!-- Bad idea {{ tag | last }} -->
   <ul>
   {% for post in {{ tag | last }} %}
   <li> {{ post }}

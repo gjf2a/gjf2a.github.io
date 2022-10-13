@@ -10,9 +10,9 @@ Assignments are classified into the following categories. Click on a category to
 ## Difficulty Level
 
 * [Easy](easy.html)
-* Moderate
-* Difficult
+* [Moderate](moderate.html)
+* [Difficult](difficult.html)
 
 ## Subject Areas
 
-* Operating Systems
+* [Operating Systems](operating-systems.html)

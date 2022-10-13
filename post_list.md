@@ -21,13 +21,11 @@ layout: default
 
 {% for tag in site.tags %}
 ## {{ tag | first }}
-<!--
   <ul>
   {% for post in {{ tag | last }} %}
   <li> <a href="{{ post.url }}"> {{ post.title }} </a>
   {% endfor %}
   </ul>
--->
 {% endfor %}
 
 # Site

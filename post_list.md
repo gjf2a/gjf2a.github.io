@@ -9,9 +9,7 @@ layout: default
 <ul>
   {% for post in site.posts %}
     <li>
-      <a href="{{ post.url }}">
-        {{ post.title }}
-      </a>
+      <a href="{{ post.url }}">{{ post.title }}</a>
       <!-- - <time datetime="{{ post.date | date: "%Y-%m-%d" }}">{{ post.date | date_to_long_string }}</time> -->
     </li>
   {% endfor %}
@@ -20,9 +18,9 @@ layout: default
 # Tags
 
 {% for tag in site.tags %}
-## {{ tag | first }}
+## {{ tag[0] }}
   <ul>
-  {% for post in {{ tag | last }} %}
+  {% for post in {{ tag[1] }} %}
   <li> <a href="{{ post.url }}"> {{ post.title }} </a>
   {% endfor %}
   </ul>

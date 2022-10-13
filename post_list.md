@@ -24,7 +24,7 @@ layout: default
 <!-- Bad idea {{ tag | last }} -->
   <ul>
   {% for post in {{ tag | last }} %}
-  <li> {{ post }}
+  <li> <a href="{{ post.url }}"> {{ post.title }} </a>
   {% endfor %}
   </ul>
 {% endfor %}

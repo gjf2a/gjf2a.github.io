@@ -4,7 +4,7 @@ layout: default
 
 <!-- Credit: https://learn.cloudcannon.com/jekyll/list-posts/ -->
 
-## Posts
+# Posts
 
 <ul>
   {% for post in site.posts %}
@@ -17,10 +17,11 @@ layout: default
   {% endfor %}
 </ul>
 
-## Tags
+# Tags
 
 {% for tag in site.tags %}
-### {{ tag | first }},
+## {{ tag | first }}
+{{ tag | last }}
   <ul>
   {% for post in {{ tag | last }} %}
   <li> {{ post }}
@@ -28,13 +29,13 @@ layout: default
   </ul>
 {% endfor %}
 
-### Site
+# Site
 {{ site.tags }}
 
-### Page
+# Page
 {{ page.tags }}
 
-### Loop
+# Loop
 {% for tag in site.tags %}
   Name: {{ tag | first }},
   count: {{ tag | last | size}}

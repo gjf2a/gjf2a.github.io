@@ -2,7 +2,9 @@
 layout: default
 ---
 
-# Easy Assignments
+# Easy Assignments 12:13 pm
+
+{{site.tags | find: "Easy"}}
 
 <ul>
 {% for post in {{site.tags | find: "Easy"}}[1] %}

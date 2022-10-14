@@ -1,12 +1,15 @@
 ---
 layout: work
-type: Project
-num: 10
 worktitle: Cooperative Multitasking Kernel
 tags:
 - Operating Systems
 - Difficult
 ---
+
+## Acknowledgement
+
+This assignment was adapted from [materials](https://os.phil-opp.com/) developed by 
+[Philipp Oppermann](https://github.com/phil-opp).
 
 ## Overview
 
@@ -140,18 +143,3 @@ Do they work as advertised? Feel free to add additional information to
 * Then, implement process execution
   * I/O for the started process should appear in the appropriate window
 * Finally, implement your schedulers
-
-## Submissions
-* Create a **private** GitHub repository for your cooperative kernel.
-* Paste the repository URL into your Teams channel.
-* Also post a PDF document to your Teams channel containing your analysis of
-the scheduling alternatives.
-
-## Assessment
-* **Partial**: The user can execute and interact with a process.
-* **Complete**: Meets all requirements given above.
-
-## Acknowledgement
-
-This assignment was adapted from [materials](https://os.phil-opp.com/) developed by 
-[Philipp Oppermann](https://github.com/phil-opp).

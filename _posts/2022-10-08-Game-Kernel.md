@@ -1,12 +1,14 @@
 ---
 layout: work
-type: Project
-num: 9
 worktitle: Game Kernel
 tags:
 - Operating Systems
 - Moderate
 ---
+## Acknowledgement
+
+This assignment was adapted from [materials](https://os.phil-opp.com/) developed by 
+[Philipp Oppermann](https://github.com/phil-opp).
 
 ## Overview
 
@@ -18,7 +20,7 @@ and even have multiple instances of the same game in progress at once.
 
 Here is a screenshot of how the Game Kernel looks:
 
-<img src="https://hendrix-cs.github.io{{site.baseurl}}/assets/images/Game_Kernel_In_Progress.PNG" width=500>
+<img src="{{site.baseurl}}/assets/images/Game_Kernel_In_Progress.PNG" width=500>
 
 Here is a summary of the required functionality:
 * When the Game Kernel starts, we see a starting screen with three lines of
@@ -149,15 +151,3 @@ To import them into your source file:
 	use chicken_invaders::Game;
 	use baremetal_snake::MainGame;
 	
-## Submissions
-* Create a **private** GitHub repository for your game kernel.
-* Paste the repository URL into your Teams channel.
-
-## Assessment
-* **Complete**: Meets all requirements given above.
-* **Partial**: Sincere attempt to meet requirements, but incomplete in some way.
-
-## Acknowledgement
-
-This assignment was adapted from [materials](https://os.phil-opp.com/) developed by 
-[Philipp Oppermann](https://github.com/phil-opp).

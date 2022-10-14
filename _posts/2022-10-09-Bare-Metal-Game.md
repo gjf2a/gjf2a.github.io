@@ -1,21 +1,15 @@
 ---
 layout: work
-type: Project
-num: 8
 worktitle: Bare Metal Game
 tags:
 - Operating Systems
 - Moderate
 ---
 
-## Tags
+## Acknowledgement
 
-### Page
-{{ page.tags }}
-
-### Site
-
-{{ site.tags }}
+This assignment was adapted from [materials](https://os.phil-opp.com/) developed by 
+[Philipp Oppermann](https://github.com/phil-opp).
 
 ## Description
 
@@ -31,8 +25,6 @@ You are encouraged to be creative in using VGA characters to represent your game
 You are welcome to develop an original game or to create your own interpretation of a classic game.
 As an example, feel free to reference [Ghost Hunter](https://github.com/gjf2a/ghost_hunter),
 my own interpretation of a well-known classic.
-
-Unlike our other projects, for this project you are welcome to work in a team of up to three students.
 
 ## Interrupts
 
@@ -253,19 +245,6 @@ This project is very flexible in its requirements. A successful submission will:
 7. Allow the user to restart the game when it ends.
 8. Display the user's current score.
 
-## Submissions
-* Create a **public** GitHub repository for your bare metal game.
-* Post the repository URL to the General channel in the CSCI 320 Teams page by 5pm on Thursday, March 25.
-* Pick four games. Download and play them. Then post reviews of each game in your private Teams channel by 
-  Friday, March 26 at 5 pm.
 
-## Assessment
-* **Partial**: Meets requirements 1, 2, and 3, and either requirement 4 or requirement 5.
-* **Complete**: Meets all requirements given above.
-
-## Acknowledgement
-
-This assignment was adapted from [materials](https://os.phil-opp.com/) developed by 
-[Philipp Oppermann](https://github.com/phil-opp).
 
 ------------------------------------------------------------------------

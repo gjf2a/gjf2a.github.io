@@ -1,7 +1,5 @@
 ---
 layout: work
-type: Project
-num: 2
 worktitle: Creating Shell Commands Using Rust
 tags:
 - Operating Systems
@@ -18,13 +16,7 @@ writing many of these programs:
 * `duplicate`: This program also expects two command-line arguments. It will give a "usage" message if it does not receive them. It will make a copy of the file given by the first argument with the name given by the second argument.
 * `start`: Prints out the first ten lines of each file listed in the command-line arguments. If the first argument begins with a dash, use the number immediately following the dash instead of ten.
 * `counter`: Prints out the number of words, lines, and characters for each file listed in its command-line arguments. If the first argument begins with a dash, the letters "w", "l", and "c" immediately following the dash indicate which of words, lines, and characters get displayed.
-
-## Submissions
-* Create a separate **private** GitHub repository for each of these programs.
-* [Submit GitHub URLs](https://docs.google.com/forms/d/e/1FAIpQLSf0I-c_DBBX5N-V36PPuwAHnijoj4LlKNsTP5SCWjg60dNMKQ/viewform?usp=sf_link)
-
-## Assessment
-* **Partial**: Any three programs correctly completed.
-* **Complete**: All six programs correctly completed.
+* `findtext`: Output every line that contains a specified pattern. The first command-line argument is the fixed-string pattern. Remaining arguments are the names of the files to inspect.
+* `order`: Works like `cat`, except the output lines must be sorted before being output. All lines from all files will be mixed together and then sorted. If the "-r" command-line argument is provided, they should be sorted in reverse order.
 
 ------------------------------------------------------------------------

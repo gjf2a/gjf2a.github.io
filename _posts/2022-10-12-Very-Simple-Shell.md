@@ -1,14 +1,67 @@
 ---
 layout: work
-type: Project
-num: 4
-worktitle: Unix Shell
+worktitle: Very Simple Shell
 tags:
 - Operating Systems
 - Difficult
 ---
 
-Enhance [vssh]({{site.baseurl}}/projects/rust2.html) as follows:
+# Acknowledgement
+
+This assignment was adapted from [materials](http://rust-class.org/pages/ps2.html) developed by 
+[David Evans](http://www.cs.virginia.edu/~evans/) at the 
+[University of Virginia](https://engineering.virginia.edu/departments/computer-science).	
+
+# Part 1 - Running Programs
+
+Implement the following shell command-line interpreter:
+* `vssh`, the Very Simple SHell: 
+  * Displays the [current working directory](https://doc.rust-lang.org/std/env/fn.current_dir.html) while awaiting user input.
+  * If the user types `exit`, the program ends.
+  * If the user types `cd [dir]`, change [current working directory](https://doc.rust-lang.org/std/env/fn.set_current_dir.html) accordingly.
+  * If the user types a blank line, ignore it and display the prompt once again.
+  * Execute any other command the user types by spawning a new process:
+    * Be sure to include the [nix crate](https://crates.io/crates/nix) in `Cargo.toml`. 
+	* Use [fork](https://docs.rs/nix/0.19.1/nix/unistd/fn.fork.html) to create the child process.
+	* Within the child process, use [execvp](https://docs.rs/nix/0.19.1/nix/unistd/fn.execvp.html) to execute the command.
+	* Within the parent process, use [waitpid](https://docs.rs/nix/0.19.1/nix/sys/wait/fn.waitpid.html) to wait for the child process to complete.
+
+Here is an example execution of `vssh`:
+
+```
+gjf2a@18837FDRL:/mnt/c/Users/ferrer/Documents/Courses/2020_2S/CSCI320/Solutions/vssh$ cargo run
+   Compiling vssh v0.1.0 (/mnt/c/Users/ferrer/Documents/Courses/2020_2S/CSCI320/Solutions/vssh)   
+   Finished dev [unoptimized + debuginfo] target(s) in 1.89s                                    
+   Running `target/debug/vssh`                                                               
+/mnt/c/Users/ferrer/Documents/Courses/2020_2S/CSCI320/Solutions/vssh$ cd src                   
+/mnt/c/Users/ferrer/Documents/Courses/2020_2S/CSCI320/Solutions/vssh/src$ grep fn main.rs     
+fn main() {                                                                             
+fn get_input(prompt: &str) -> String {                                                     
+fn run(command: &str) {                                                            
+fn externalize(command: &str) -> Box<[CString]> {                 
+/mnt/c/Users/ferrer/Documents/Courses/2020_2S/CSCI320/Solutions/vssh/src$ cd ..
+/mnt/c/Users/ferrer/Documents/Courses/2020_2S/CSCI320/Solutions/vssh$ ls        
+Cargo.lock  Cargo.toml  src  target  vssh.iml                           
+/mnt/c/Users/ferrer/Documents/Courses/2020_2S/CSCI320/Solutions/vssh$ exit 
+gjf2a@18837FDRL:/mnt/c/Users/ferrer/Documents/Courses/2020_2S/CSCI320/Solutions/vssh$   
+```
+
+The `execvp` system call requires the command to be formatted as a fixed-size array of 
+[c-style strings](https://doc.rust-lang.org/std/ffi/struct.CString.html). The function
+below will perform this conversion for you:
+
+```
+fn externalize(command: &str) -> Box<[CString]> {
+    let converted = command.split_whitespace()
+        .map(|s| CString::new(s).unwrap())
+        .collect::<Vec<_>>();
+    converted.into_boxed_slice()
+}
+```
+
+# Part 2 - I/O Redirection
+
+Enhance your completed shell from Part 1 as follows:
 1. If the line ends with the `&` symbol, it should run in the background. That is, your shell should not wait for it 
 to terminate; the command line should immediately return. Your shell should print the PID of the process, so that 
 the user may later manage it as needed. This is typically used for long-running programs that perform a lot of 
@@ -135,19 +188,5 @@ recommend creating a `struct` to represent the different components of the parse
 	    * Close the pipe's output. It is unnecessary here, as the pipe will send data to 
 		  the current command.
 		* Return the pipe's input, so it can receive output from the preceding command in the pipeline.
-
-
-## Submissions
-* Push your enhancements to the same GitHub repository you used for `vssh` in the previous assignment.
-
-## Assessment
-* **Partial**: Correctly complete any two enhancements.
-* **Complete**: All four enhancements correctly completed.
-
-## Acknowledgement
-
-This assignment was adapted from [materials](http://rust-class.org/pages/ps2.html) developed by 
-[David Evans](http://www.cs.virginia.edu/~evans/) at the 
-[University of Virginia](https://engineering.virginia.edu/departments/computer-science).	
 
 ------------------------------------------------------------------------

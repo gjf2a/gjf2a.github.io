@@ -26,7 +26,7 @@ layout: default
 
 ## Spring 2020
 * [CSCI 150: Foundations of Computer Science](https://hendrix-cs.github.io/csci150/)
-* [CSCI 322: Computing Systems Organization)(https://hendrix-cs.github.io/csci322)
+* [CSCI 322: Computing Systems Organization](https://hendrix-cs.github.io/csci322)
 * [CSCI 335: Artificial Intelligence](https://hendrix-cs.github.io/csci335/)
 
 ## Fall 2019

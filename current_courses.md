@@ -2,7 +2,9 @@
 layout: default
 ---
 
-## Courses, Fall 2022
+## Courses, Spring 2023
 
-I am on sabbatical from teaching this semester. I'm looking forward to 
-returning to the classroom in Spring 2022!
+* [CSCI 151: Data Structures](https://hendrix-cs.github.io/csci151/)
+* [CSCI 235: Intelligent Robotics](https://hendrix-cs.github.io/csci235)
+* [CSCI 320: Operating Systems & Concurrency](https://hendrix-cs.github.io/csci320)
+

@@ -2,6 +2,11 @@
 layout: default
 ---
 
+## Spring 2023
+* [CSCI 151: Data Structures](https://hendrix-cs.github.io/csci151/)
+* [CSCI 235: Intelligent Robotics](https://hendrix-cs.github.io/csci235)
+* [CSCI 320: Operating Systems & Concurrency](https://hendrix-cs.github.io/csci320)
+
 ## Fall 2022
 * Sabbatical
 
@@ -26,7 +31,7 @@ layout: default
 
 ## Spring 2020
 * [CSCI 150: Foundations of Computer Science](https://hendrix-cs.github.io/csci150/)
-* [CSCI 322: Computing Systems Organization)(https://hendrix-cs.github.io/csci322)
+* [CSCI 322: Computing Systems Organization](https://hendrix-cs.github.io/csci322)
 * [CSCI 335: Artificial Intelligence](https://hendrix-cs.github.io/csci335/)
 
 ## Fall 2019

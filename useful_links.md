@@ -18,6 +18,7 @@ layout: default
 ### Lego Mindstorms
 * [Robot Inventor MicroPython](https://lego.github.io/MINDSTORMS-Robot-Inventor-hub-API/)
 * [EV3 MicroPython](https://pybricks.com/ev3-micropython/)
+* [ev3dev2 in Python3](https://ev3dev-lang.readthedocs.io/projects/python-ev3dev/en/ev3dev-stretch/index.html)
 
 ### Git
 * [How to undo changes in a Git repository](https://opensource.com/article/18/6/git-reset-revert-rebase-commands)

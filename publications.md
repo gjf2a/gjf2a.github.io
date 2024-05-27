@@ -6,7 +6,7 @@ layout: default
 <hr>
 
 ### 2022 to present
-* Gabriel J. Ferrer. "[Weighted Randomized Anytime Planning in Pyhop.](https://bibbase.org/network/publication/ferrer-weightedrandomizedanytimeplanninginpyhop-2024)" In *[Proceedings of the 7th ICAPS Workshop on Hierarchical Planning(HPlan 2024)](https://icaps24.icaps-conference.org/program/workshops/hplan/) (Banff, Alberta, June 3, 2024) ([GitHub](https://github.com/gjf2a/pyhop_anytime))
+* Gabriel J. Ferrer. "[Weighted Randomized Anytime Planning in Pyhop.](https://bibbase.org/network/publication/ferrer-weightedrandomizedanytimeplanninginpyhop-2024)" In *[Proceedings of the 7th ICAPS Workshop on Hierarchical Planning(HPlan 2024)](https://icaps24.icaps-conference.org/program/workshops/hplan/)* (Banff, Alberta, June 3, 2024). ([GitHub](https://github.com/gjf2a/pyhop_anytime))
 * Gabriel J. Ferrer. "[The Pluggable Interrupt OS: Writing a Kernel in Rust.](assets/publications/RustEducation2022.pdf)" In *[Proceedings of the Rust Education Workshop 2022](https://rust-edu.org/workshop/proceedings.pdf)* (August 20, 2022). ([YouTube](https://www.youtube.com/watch?v=koYSvETs03o&list=PL85XCvVPmGQhVCcPkmgbMUfJv4iGVixj-&index=8), [GitHub](https://github.com/gjf2a/pluggable_interrupt_os), [crates.io](https://crates.io/crates/pluggable_interrupt_os))
 
 ### 2016-2020

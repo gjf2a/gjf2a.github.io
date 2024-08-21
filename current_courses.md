@@ -2,9 +2,8 @@
 layout: default
 ---
 
-## Courses, Spring 2023
-
+## Courses, Fall 2024
+* The Engaged Citizen: Designing with the Mind in Mind
+* [CSCI 150: Foundations of Computer Science](https://hendrix-cs.github.io/csci150/)
 * [CSCI 151: Data Structures](https://hendrix-cs.github.io/csci151/)
-* [CSCI 235: Intelligent Robotics](https://hendrix-cs.github.io/csci235)
-* [CSCI 320: Operating Systems & Concurrency](https://hendrix-cs.github.io/csci320)
 

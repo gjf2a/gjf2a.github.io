@@ -13,4 +13,5 @@ layout: default
 9. [Counter, Part 4](https://youtu.be/Wv44T9QZbNY)
 10. [Shopping List App, Part 1](https://youtu.be/NeDV95sx53c)
 11. [Shopping List App, Part 2](https://youtu.be/z6hERstvdVw)
-12. [Simple Video Game](https://youtu.be/z6hERstvdVw)
+12. [Simple Video Game, Part 1](https://youtu.be/z6hERstvdVw)
+13. [Simple Video Game, Part 2](https://youtu.be/OkOwzeJCm38)

@@ -17,19 +17,17 @@ cd my-csci335
 git remote remove origin
 ```
 
-3. Go to GitHub and select the option to create new private repository:
-<img src="../assets/images/new-repo-dropdown.png"></img>
+3. Go to GitHub and select the option to create new private repository:<br>
+<img src="../assets/images/new-repo-dropdown.png">
 
-4. When creating the new private repository, mark it as private:
-<img src="../assets/images/new-repo-private.png"></img>
+4. When creating the new private repository, mark it as private:<br>
+<img src="../assets/images/new-repo-private.png">
 
-5. Add your new private repository as the remote for your clone:
+5. Add your new private repository as the remote for your clone. (Of course, you won't be using the `gjf2a` account - substitute your own userid in
+place of `gjf2a`):
 ```
 git remote add origin https://github.com/gjf2a/my-csci335
 ```
-
-Of course, you won't be using the `gjf2a` account - substitute your own userid in
-place of `gjf2a`.
 
 6. Push the cloned code to your private repository:
 ```

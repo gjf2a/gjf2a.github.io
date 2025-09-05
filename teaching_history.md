@@ -2,6 +2,29 @@
 layout: default
 ---
 
+## Fall 2025
+* [CSCI 151: Data Structures](https://hendrix-cs.github.io/csci151/)
+* [CSCI 335: Artificial Intelligence](https://hendrix-cs.github.io/csci335)
+* [CSCI 410: Senior Seminar](https://hendrix-cs.github.io/csci410)
+
+## Spring 2025
+* [CSCI 235: Intelligent Robotics](https://hendrix-cs.github.io/csci235)
+* [CSCI 320: Operating Systems & Concurrency](https://hendrix-cs.github.io/csci320)
+
+## Fall 2024
+* LBST 150: The Engaged Citizen: Designing with the Mind in Mind
+* [CSCI 150: Foundations of Computer Science](https://hendrix-cs.github.io/csci150/)
+* [CSCI 151: Data Structures](https://hendrix-cs.github.io/csci151/)
+
+## Spring 2024
+* [CSCI 270: Computational Humanities](https://hendrix-cs.github.io/csci270/)
+* [CSCI 322: Computing Systems Organization](https://hendrix-cs.github.io/csci322)
+
+## Fall 2023
+* [CSCI 151: Data Structures](https://hendrix-cs.github.io/csci151/)
+* [CSCI 335: Artificial Intelligence](https://hendrix-cs.github.io/csci335)
+* [CSCI 410: Senior Seminar](https://hendrix-cs.github.io/csci410)
+
 ## Spring 2023
 * [CSCI 151: Data Structures](https://hendrix-cs.github.io/csci151/)
 * [CSCI 235: Intelligent Robotics](https://hendrix-cs.github.io/csci235)

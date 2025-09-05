@@ -42,7 +42,7 @@ navigation:
       url: 'publications.html'
   - page: Contact Info
     url: 'contact.html'
-  - page: Other Personal Pages
+  - page: Other Pages
     url: 'other_pages.html'
   - page: Useful Links
     url: 'useful_links.html'

@@ -33,3 +33,8 @@ git remote add origin https://github.com/gjf2a/my-csci335
 ```
 git push -u origin main
 ```
+
+If the above doesn't work, try this instead:
+```
+git push -u origin master
+```

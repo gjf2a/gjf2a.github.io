@@ -1,6 +1,12 @@
 ---
 layout: default
 ---
+## Fall 2026
+* [CSCI 235: Intelligent Robotics](https://hendrix-cs.github.io/csci235)
+
+## Spring 2026
+* [CSCI 270: Computational Humanities](https://hendrix-cs.github.io/csci270/)
+* [CSCI 322: Computing Systems Organization](https://hendrix-cs.github.io/csci322)
 
 ## Fall 2025
 * [CSCI 151: Data Structures](https://hendrix-cs.github.io/csci151/)
@@ -17,8 +23,8 @@ layout: default
 * [CSCI 151: Data Structures](https://hendrix-cs.github.io/csci151/)
 
 ## Spring 2024
+* [CSCI 150: Foundations of Computer Science](https://hendrix-cs.github.io/csci150/)
 * [CSCI 270: Computational Humanities](https://hendrix-cs.github.io/csci270/)
-* [CSCI 322: Computing Systems Organization](https://hendrix-cs.github.io/csci322)
 
 ## Fall 2023
 * [CSCI 151: Data Structures](https://hendrix-cs.github.io/csci151/)

@@ -6,7 +6,7 @@ layout: default
 <hr>
 
 ### 2022 to present
-* Gabriel J. Ferrer and Jacob Collier-Tenison. "[BitSLAM: Trajectory-Based SLAM Using Particle Filters](assets/publications/IROS_2026/Late_Breaking.pdf)" Intelligent Robots and Systems (IROS 2026) Late-Breaking Abstract, Pittsburgh, Pennsylvania, September 29, 2026.
+* Gabriel J. Ferrer and Jacob Collier-Tenison. "[BitSLAM: Trajectory-Based SLAM Using Particle Filters](assets/publications/IROS_2026_Late_Breaking.pdf)" Intelligent Robots and Systems (IROS 2026) Late-Breaking Abstract, Pittsburgh, Pennsylvania, September 29, 2026.
 * Gabriel J. Ferrer. "[Using ROS2 to Build an Integrated SLAM System in Rust](assets/publications/IROS_2026_Rust.pdf)" In *[Proceedings of the IROS 2026 Workshop: Why Rust for Robotics: A Perspective From Industry](https://rust-for-robotics.github.io/iros2026)* (Pittsburgh, Pennsylvania, September 27, 2026)
 * Gabriel J. Ferrer. "[Weighted Randomized Anytime Planning in Pyhop.](https://bibbase.org/network/publication/ferrer-weightedrandomizedanytimeplanninginpyhop-2024)" In *[Proceedings of the 7th ICAPS Workshop on Hierarchical Planning(HPlan 2024)](https://icaps24.icaps-conference.org/program/workshops/hplan/)* (Banff, Alberta, June 3, 2024). ([GitHub](https://github.com/gjf2a/pyhop_anytime))
 * Gabriel J. Ferrer. "[Fuzzy Visual Obstacle Avoidance Using OpenCV and iRobot Create3](assets/publications/IROS_2023_Late_Breaking.pdf)" Intelligent Robots and Systems (IROS 2023) Late-Breaking Abstract (Detroit, Michigan, 2023).

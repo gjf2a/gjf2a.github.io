@@ -40,6 +40,8 @@ navigation:
       url: 'research.html'
     - page: Publications
       url: 'publications.html'
+    - page: Presentation Abstracts
+      url: 'presentations.html"
   - page: Contact Info
     url: 'contact.html'
   - page: Other Pages
